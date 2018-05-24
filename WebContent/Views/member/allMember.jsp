@@ -47,6 +47,7 @@
 				<th>성별</th>
 				<th>취미</th>
 				<th>가입날짜</th>
+				<th>활성여부</th>
 			</tr>
 			<%
 				for (MemberVo m : aList) {
@@ -66,6 +67,13 @@
 				<td><%=gender%></td>
 				<td><%=m.getHobby()%></td>
 				<td><%=m.getEnrollDate()%></td>
+				<td>
+				<form action="/memberActivation" method="post">
+					<input type="hidden" name="activation" value="<%=m.getActivation()%>">
+					<input type="hidden" name="userId" value="<%=m.getUserId()%>">
+					<input type="submit" value="<%=m.getActivation()%>" style="width: 100%">
+				</form>
+				</td>
 			</tr>
 			<%
 				}

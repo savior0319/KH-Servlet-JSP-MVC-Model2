@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class MemberVo {
 
-	private String userId, userPwd, userName, email, phone, address, gender, hobby;
+	private String userId, userPwd, userName, email, phone, address, gender, hobby, activation;
 	private int age;
 	private Date enrollDate;
 
@@ -13,6 +13,14 @@ public class MemberVo {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public void setActivation(String activation) {
+		this.activation = activation;
+	}
+	
+	public String getActivation() {
+		return activation;
 	}
 
 	public void setUserId(String userId) {

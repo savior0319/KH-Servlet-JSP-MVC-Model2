@@ -72,7 +72,7 @@ public class MemberDAO {
 		String query = prop.getProperty("allMember");
 		try {
 			psmt = conn.prepareStatement(query);
-			
+
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
@@ -87,13 +87,37 @@ public class MemberDAO {
 				mv.setGender(rs.getString("gender"));
 				mv.setHobby(rs.getString("hobby"));
 				mv.setEnrollDate(rs.getDate("enrolldate"));
+				mv.setActivation(rs.getString("activation"));
 
 				aList.add(mv);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(psmt);
 		}
 		return aList;
+	}
+
+	public int memberActivation(Connection conn, String activation, String userId) {
+
+		int result = 0;
+		String query = prop.getProperty("memberActivation");
+
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, activation);
+			psmt.setString(2, userId);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
 	}
 
 }

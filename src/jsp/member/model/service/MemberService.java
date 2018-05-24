@@ -25,11 +25,23 @@ public class MemberService {
 	public ArrayList<MemberVo> allMember() {
 		conn = JDBCTemplate.getConnect(conn);
 		ArrayList<MemberVo> aList = mDao.allMember(conn);
-		JDBCTemplate.close(conn);
 		if (aList.isEmpty()) {
 			return null;
 		} else
 			return aList;
+	}
+
+	public int memberActivation(String activation, String userId) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.memberActivation(conn, activation, userId);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else
+			JDBCTemplate.rollBack(conn);
+
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }
