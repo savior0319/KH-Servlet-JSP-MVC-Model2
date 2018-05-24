@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page errorPage="errorpage.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +9,22 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 </head>
-<script>
-	alert('로그아웃 했습니다');
-	window.location.href = "/index.jsp"
-</script>
+
+<style>
+.wrapper {
+	margin: 0 auto;
+	display: table;
+}
+</style>
+
+<body>
+	<div class="wrapper">
+		<h2>잘못된 접근 입니다</h2>
+		<hr>
+		<h3>
+			<a href="/index.jsp">로그인 페이지로 이동</a>
+		</h3>
+	</div>
+</body>
+
 </html>

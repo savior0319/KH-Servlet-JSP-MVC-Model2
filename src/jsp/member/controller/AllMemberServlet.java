@@ -1,7 +1,9 @@
 package jsp.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,33 +14,27 @@ import javax.servlet.http.HttpSession;
 import jsp.member.model.service.MemberService;
 import jsp.member.model.vo.MemberVo;
 
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "AllMember", urlPatterns = { "/allMember" })
+public class AllMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberVo mv = new MemberVo();
 	private MemberService mService = new MemberService();
 
-	public LoginServlet() {
+	public AllMemberServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		ArrayList<MemberVo> aList = mService.allMember();
 
-		mv = mService.memberLogin(userId, userPwd);
-		HttpSession session = request.getSession();
-		session.setAttribute("user", mv);
-
-		// 로그인 성공 시
-		if (mv != null) {
-			response.sendRedirect("/Views/member/loginSuccess.jsp");
+		if (aList == null) {
+			response.sendRedirect("/Views/member/noMemberResult.jsp");
 		} else {
-			// 로그인 실패 시
-			response.sendRedirect("/Views/member/loginFail.jsp");
+			System.out.println("회원이 있습니다");
+			RequestDispatcher view = request.getRequestDispatcher("/Views/member/allMember.jsp");
+			request.setAttribute("userList", aList);
+			view.forward(request, response);
 		}
 	}
 

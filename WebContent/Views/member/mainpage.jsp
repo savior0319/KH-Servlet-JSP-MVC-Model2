@@ -1,6 +1,7 @@
 <%@page import="jsp.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page errorPage="errorpage.jsp"%>
 <%
 	MemberVo mv = (MemberVo) session.getAttribute("user");
 %>
@@ -24,12 +25,27 @@
 
 <body>
 	<div class="wrapper">
-		<h1><%=mv.getUserName() + "님 환영합니다"%></h1>
+		<h1>
+			<%=mv.getUserName() + "님 환영합니다"%>
+		</h1>
 		<h3>
-			<br> <a href="myPage.jsp">마이페이지</a><br> <a href="/logout">로그아웃</a><br>
-			<a href="#">회원탈퇴</a><br>
+			<br> <a href="myPage.jsp">마이페이지</a> <br> <a href="/logout">로그아웃</a>
+			<br> <a href="#">회원탈퇴</a> <br> <a href="/allMember"
+				id="adminOnly">전체 회원 조회</a>
 		</h3>
 	</div>
 </body>
+
+<%
+	if (!mv.getUserId().equals("admin")) {
+%>
+<script>
+	window.onload = function() {
+		document.getElementById("adminOnly").style.display = 'none';
+	}
+</script>
+<%
+	}
+%>
 
 </html>

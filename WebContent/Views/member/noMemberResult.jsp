@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page errorPage="errorpage.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
 <title>Document</title>
 </head>
 <script>
-	alert('로그아웃 했습니다');
-	window.location.href = "/index.jsp"
+	alert('회원 정보가 없습니다');
+	history.back(-1);
 </script>
 </html>
