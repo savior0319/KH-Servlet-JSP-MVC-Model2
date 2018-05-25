@@ -35,7 +35,7 @@ public class MemberActivationServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("allMember");
 		} else {
-			// response.sendRedirect("allMember"); 안됐을때
+			response.sendRedirect("/Views/member/allMemberError.jsp");
 		}
 
 	}

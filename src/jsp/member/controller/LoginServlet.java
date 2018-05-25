@@ -33,12 +33,14 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", mv);
 
-		// 로그인 성공 시
-		if (mv != null) {
-			response.sendRedirect("/Views/member/loginSuccess.jsp");
+		if (!mv.getActivation().equals("y")) {
+			response.sendRedirect("/Views/member/loginNoActivation.jsp");
 		} else {
-			// 로그인 실패 시
-			response.sendRedirect("/Views/member/loginFail.jsp");
+			if (mv != null) {
+				response.sendRedirect("/Views/member/loginSuccess.jsp");
+			} else {
+				response.sendRedirect("/Views/member/loginFail.jsp");
+			}
 		}
 	}
 

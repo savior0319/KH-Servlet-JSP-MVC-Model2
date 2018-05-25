@@ -44,4 +44,17 @@ public class MemberService {
 		return result;
 	}
 
+	public int memberSignUp(MemberVo mv) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.memberSignUp(conn, mv);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else
+			JDBCTemplate.rollBack(conn);
+
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

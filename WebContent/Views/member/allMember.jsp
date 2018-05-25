@@ -28,7 +28,7 @@
 
 <%
 	if (!mv.getUserId().equals("admin")) {
-		response.sendRedirect("/index.jsp");
+		response.sendRedirect("/Views/member/errorpage.jsp");
 	} else {
 %>
 
@@ -90,7 +90,7 @@
 
 <script>
 	function back() {
-		history.back(-1);
+		window.location.href = "/index.jsp";
 	}
 </script>
 

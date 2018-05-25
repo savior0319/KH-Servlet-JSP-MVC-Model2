@@ -54,6 +54,7 @@ public class MemberDAO {
 				mv.setGender(rs.getString("gender"));
 				mv.setHobby(rs.getString("hobby"));
 				mv.setEnrollDate(rs.getDate("enrolldate"));
+				mv.setActivation(rs.getString("activation"));
 			}
 
 		} catch (SQLException e) {
@@ -109,6 +110,34 @@ public class MemberDAO {
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, activation);
 			psmt.setString(2, userId);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
+
+
+	public int memberSignUp(Connection conn, MemberVo mv) {
+
+		int result = 0;
+		String query = prop.getProperty("memberSignUp");
+
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, mv.getUserId());
+			psmt.setString(2, mv.getUserPwd());
+			psmt.setString(3, mv.getUserName());
+			psmt.setInt(4, mv.getAge());
+			psmt.setString(5, mv.getEmail());
+			psmt.setString(6, mv.getPhone());
+			psmt.setString(7, mv.getAddress());
+			psmt.setString(8, mv.getGender());
+			psmt.setString(9, mv.getHobby());
 
 			result = psmt.executeUpdate();
 
