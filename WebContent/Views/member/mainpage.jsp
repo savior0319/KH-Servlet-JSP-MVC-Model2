@@ -29,7 +29,7 @@
 			<%=mv.getUserName() + "님 환영합니다"%>
 		</h1>
 		<h3>
-			<br> <a href="myPage.jsp">마이페이지</a> <br> <a href="/logout">로그아웃</a>
+			<br> <a href="/mypage" >마이페이지</a> <br> <a href="/logout">로그아웃</a>
 			<br> <a href="#">회원탈퇴</a> <br> <a href="/allMember"
 				id="adminOnly">전체 회원 조회</a>
 		</h3>

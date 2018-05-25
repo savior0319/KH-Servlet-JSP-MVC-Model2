@@ -7,10 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>failed</title>
+    <title>Document</title>
 </head>
+
 <script>
-alert('변경 실패');
+alert('회원 정보가 없습니다');
 history.back(-1);
 </script>
 

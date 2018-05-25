@@ -57,4 +57,10 @@
         </div>
     </body>
 
+    <script>
+    function back(){
+        history.back(-1);
+    }
+    </script>
+
     </html>

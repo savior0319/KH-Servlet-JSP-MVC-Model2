@@ -43,7 +43,7 @@ fieldset {
 		<h1>메인페이지</h1>
 		<fieldset>
 			<legend>로그인</legend>
-			<form action="/login" method="post">
+			<form action="/memberLogin" method="post">
 				아이디 <input type="text" name="userId" id="userId"
 					placeholder="아이디 입력" required pattern="^[a-z0-9_]{4,16}$">
 				<br> 비밀번호 <input type="password" name="userPwd" id="userPwd"

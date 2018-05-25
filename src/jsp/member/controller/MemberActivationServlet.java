@@ -25,7 +25,11 @@ public class MemberActivationServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 
 		if (activation.equals("y")) {
-			activation = "n";
+			if (userId.equals("admin")) {
+				response.sendRedirect("/Views/member/allMemberError.jsp");
+			} else {
+				activation = "n";
+			}
 		} else {
 			activation = "y";
 		}
