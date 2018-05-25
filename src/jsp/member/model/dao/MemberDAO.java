@@ -149,4 +149,8 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int memberUpdate(Connection conn, MemberVo mv) {
+		return 0;
+	}
+
 }

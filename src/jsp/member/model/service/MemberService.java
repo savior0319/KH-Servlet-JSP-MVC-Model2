@@ -57,5 +57,18 @@ public class MemberService {
 		return result;
 	}
 
+	public int memberUpdate(MemberVo mv) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.memberUpdate(conn, mv);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else
+			JDBCTemplate.rollBack(conn);
+
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 }
