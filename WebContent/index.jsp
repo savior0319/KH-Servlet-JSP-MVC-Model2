@@ -50,8 +50,8 @@ fieldset {
 					placeholder="비밀번호입력" required
 					pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$"> <br> <input
 					type="submit" value="로그인"> <a
-					href="/Views/member/joinus.jsp">회원가입</a> <a href="/Views/member/idfind.html">ID 찾기</a> <a
-					href="/Views/member/pwchange.html">PW 변경</a>
+					href="/Views/member/joinus.jsp">회원가입</a> <a href="/Views/member/idfind.jsp">ID 찾기</a> <a
+					href="/Views/member/pwchange.jsp">PW 변경</a>
 			</form>
 		</fieldset>
 	</div>
