@@ -13,29 +13,26 @@ import javax.servlet.http.HttpSession;
 import jsp.member.model.service.MemberService;
 import jsp.member.model.vo.MemberVo;
 
-/**
- * Servlet implementation class MypageServlet
- */
 @WebServlet(name = "Mypage", urlPatterns = { "/mypage" })
 public class MypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MypageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(false);
-		MemberVo mv = (MemberVo) session.getAttribute("user");
-		MemberVo member = new MemberService().memberLogin(mv.getUserId(), mv.getUserPwd());
+	public MypageServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = null;
+		MemberVo mv = null;
+		MemberVo member = null;
+		try {
+			session = request.getSession(false);
+			mv = (MemberVo) session.getAttribute("user");
+			member = new MemberService().memberLogin(mv.getUserId(), mv.getUserPwd());
+		} catch (Exception e) {
+		}
 
 		if (member == null) {
 			response.sendRedirect("/Views/member/noMyinfo.jsp");
@@ -46,10 +43,8 @@ public class MypageServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
