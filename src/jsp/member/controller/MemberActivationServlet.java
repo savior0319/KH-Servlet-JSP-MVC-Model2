@@ -24,24 +24,24 @@ public class MemberActivationServlet extends HttpServlet {
 		String activation = request.getParameter("activation");
 		String userId = request.getParameter("userId");
 
-		if (activation.equals("y")) {
-			if (userId.equals("admin")) {
-				response.sendRedirect("/Views/member/allMemberError.jsp");
-			} else {
+		if (!userId.equals("admin")) {
+			if (activation.equals("y")) {
 				activation = "n";
+			} else {
+				activation = "y";
+			}
+
+			int result = mService.memberActivation(activation, userId);
+
+			if (result > 0) {
+				response.sendRedirect("allMember");
+			} else {
+				response.sendRedirect("/Views/member/allMemberError.jsp");
 			}
 		} else {
-			activation = "y";
-		}
-
-		int result = mService.memberActivation(activation, userId);
-
-		if (result > 0) {
-			response.sendRedirect("allMember");
-		} else {
+			System.out.println("error");
 			response.sendRedirect("/Views/member/allMemberError.jsp");
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
