@@ -18,6 +18,7 @@ public class MemberService {
 	public MemberVo memberLogin(String userId, String userPwd) {
 		conn = JDBCTemplate.getConnect(conn);
 		MemberVo mv = mDao.memberLogin(conn, userId, userPwd);
+
 		JDBCTemplate.close(conn);
 		return mv;
 	}
@@ -25,6 +26,8 @@ public class MemberService {
 	public ArrayList<MemberVo> allMember() {
 		conn = JDBCTemplate.getConnect(conn);
 		ArrayList<MemberVo> aList = mDao.allMember(conn);
+
+		JDBCTemplate.close(conn);
 		if (aList.isEmpty()) {
 			return null;
 		} else
@@ -68,6 +71,14 @@ public class MemberService {
 
 		JDBCTemplate.close(conn);
 		return result;
+	}
+
+	public String chekPwd(String userId) {
+		conn = JDBCTemplate.getConnect(conn);
+		String getPwd = mDao.chekPwd(conn, userId);
+
+		JDBCTemplate.close(conn);
+		return getPwd;
 	}
 
 }

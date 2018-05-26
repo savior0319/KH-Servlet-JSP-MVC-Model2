@@ -12,13 +12,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<title>메인</title>
 </head>
 
 <style>
 .wrapper {
 	margin: 0 auto;
 	display: table;
+}
+
+#pwdField {
+	font-size: 14px;
+	color: red;
 }
 </style>
 
@@ -29,7 +35,14 @@
 		</h1>
 		<h3>
 			<br>
-			<a href="/mypage">마이페이지</a>
+			<a href="#" id="myPage">마이페이지</a>
+			<form action="/pwdcheck" method="post" id="pwdChk">
+				<div id="pwdField">
+					<br>
+					비밀번호 입력
+					<input type="password" name="userPwd" id="userPwd">
+				</div>
+			</form>
 			<br>
 			<a href="/logout">로그아웃</a>
 			<br>
@@ -39,6 +52,18 @@
 		</h3>
 	</div>
 </body>
+
+<script>
+	window.onload = function() {
+		document.getElementById("pwdChk").style.display = 'none';
+	}
+
+	$(document).ready(function() {
+		$('#myPage').click(function() {
+			$('#pwdChk').fadeIn(500);
+		});
+	});
+</script>
 
 <%
 	if (!mv.getUserId().equals("admin")) {

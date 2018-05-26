@@ -146,7 +146,7 @@ public class MemberDAO {
 	}
 
 	public int memberUpdate(Connection conn, MemberVo mv) {
-		
+
 		int result = 0;
 		String query = prop.getProperty("memberUpdate");
 
@@ -166,6 +166,29 @@ public class MemberDAO {
 			JDBCTemplate.close(psmt);
 		}
 		return result;
+	}
+
+	public String chekPwd(Connection conn, String userId) {
+
+		String getPwd = null;
+
+		String query = prop.getProperty("chekPwd");
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, userId);
+
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				getPwd = rs.getString("USERPWD");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(psmt);
+		}
+		return getPwd;
 	}
 
 }
