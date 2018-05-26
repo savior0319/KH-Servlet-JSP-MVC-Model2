@@ -3,7 +3,6 @@
 <%@page import="jsp.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="errorpage.jsp"%>
-
 <%
 	@SuppressWarnings("unchecked")
 	ArrayList<MemberVo> aList = (ArrayList<MemberVo>) request.getAttribute("userList");

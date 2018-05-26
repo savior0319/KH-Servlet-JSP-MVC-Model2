@@ -21,25 +21,28 @@ public class MemberActivationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String activation = request.getParameter("activation");
-		String userId = request.getParameter("userId");
+		try {
+			String activation = request.getParameter("activation");
+			String userId = request.getParameter("userId");
 
-		if (!userId.equals("admin")) {
-			if (activation.equals("y")) {
-				activation = "n";
-			} else {
-				activation = "y";
-			}
+			if (!userId.equals("admin")) {
+				if (activation.equals("y")) {
+					activation = "n";
+				} else {
+					activation = "y";
+				}
 
-			int result = mService.memberActivation(activation, userId);
+				int result = mService.memberActivation(activation, userId);
 
-			if (result > 0) {
-				response.sendRedirect("allMember");
+				if (result > 0) {
+					response.sendRedirect("allMember");
+				} else {
+					response.sendRedirect("/Views/member/allMemberError.jsp");
+				}
 			} else {
 				response.sendRedirect("/Views/member/allMemberError.jsp");
 			}
-		} else {
-			System.out.println("error");
+		} catch (Exception e) {
 			response.sendRedirect("/Views/member/allMemberError.jsp");
 		}
 	}

@@ -6,7 +6,6 @@
 		response.sendRedirect("/Views/member/errorpage.jsp");
 	} else {
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
