@@ -18,7 +18,7 @@ public class MemberVo {
 	public void setActivation(String activation) {
 		this.activation = activation;
 	}
-	
+
 	public String getActivation() {
 		return activation;
 	}

@@ -1,8 +1,7 @@
 <%@page import="java.io.UncheckedIOException"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="jsp.member.model.vo.MemberVo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="errorpage.jsp"%>
 
 <%
@@ -71,11 +70,9 @@
 				<td><%=m.getEnrollDate()%></td>
 				<td>
 					<form action="/memberActivation" method="post">
-						<input type="hidden" name="activation"
-							value="<%=m.getActivation()%>"> <input type="hidden"
-							name="userId" value="<%=m.getUserId()%>"> <input
-							type="submit" value="<%=m.getActivation()%>" style="width: 100%"
-							id="btn">
+						<input type="hidden" name="activation" value="<%=m.getActivation()%>">
+						<input type="hidden" name="userId" value="<%=m.getUserId()%>">
+						<input type="submit" value="<%=m.getActivation()%>" style="width: 100%" id="btn">
 					</form>
 				</td>
 			</tr>

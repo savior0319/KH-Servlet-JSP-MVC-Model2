@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="errorpage.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 </head>
+
 <script>
 	alert('로그아웃 했습니다');
 	window.location.href = "/index.jsp"
 </script>
+
 </html>

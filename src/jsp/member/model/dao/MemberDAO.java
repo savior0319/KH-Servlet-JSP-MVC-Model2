@@ -118,7 +118,6 @@ public class MemberDAO {
 		return result;
 	}
 
-
 	public int memberSignUp(Connection conn, MemberVo mv) {
 
 		int result = 0;

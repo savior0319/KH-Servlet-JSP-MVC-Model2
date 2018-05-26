@@ -1,6 +1,5 @@
 <%@page import="jsp.member.model.vo.MemberVo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="errorpage.jsp"%>
 <%
 	MemberVo mv = (MemberVo) session.getAttribute("user");
@@ -29,9 +28,14 @@
 			<%=mv.getUserName() + "님 환영합니다"%>
 		</h1>
 		<h3>
-			<br> <a href="/mypage" >마이페이지</a> <br> <a href="/logout">로그아웃</a>
-			<br> <a href="#">회원탈퇴</a> <br> <a href="/allMember"
-				id="adminOnly">전체 회원 조회</a>
+			<br>
+			<a href="/mypage">마이페이지</a>
+			<br>
+			<a href="/logout">로그아웃</a>
+			<br>
+			<a href="#">회원탈퇴</a>
+			<br>
+			<a href="/allMember" id="adminOnly">전체 회원 조회</a>
 		</h3>
 	</div>
 </body>
