@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import jdbc.common.JDBCTemplate;
 import jsp.member.model.vo.MemberVo;
 
