@@ -19,9 +19,9 @@ public class MemberDAO {
 	private Properties prop = new Properties();
 
 	public MemberDAO() {
+		String path = MemberDAO.class.getResource("").getPath();
 		try {
-			prop.load(new FileReader(
-					"C:\\Users\\savio\\Documents\\webworkspace\\web2\\src\\properties\\query.properties"));
+			prop.load(new FileReader(path + "query.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

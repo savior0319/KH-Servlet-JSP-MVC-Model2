@@ -17,8 +17,8 @@ public class JDBCTemplate {
 	public static Connection getConnect(Connection conn) {
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileReader(
-					"C:\\Users\\savio\\Documents\\webworkspace\\web2\\src\\properties\\driver.properties"));
+			String path = JDBCTemplate.class.getResource("").getPath();
+			prop.load(new FileReader(path + "driver.properties"));
 			Class.forName(prop.getProperty("driver"));
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"),
 					prop.getProperty("password"));
