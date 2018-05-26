@@ -18,7 +18,7 @@ public class JDBCTemplate {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileReader(
-					"C:\\Users\\user1\\Documents\\webworkspace\\web2\\src\\properties\\driver.properties"));
+					"C:\\Users\\savio\\Documents\\webworkspace\\web2\\src\\properties\\driver.properties"));
 			Class.forName(prop.getProperty("driver"));
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"),
 					prop.getProperty("password"));
