@@ -1,6 +1,8 @@
 package jsp.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,24 +24,37 @@ public class MemberUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-		MemberVo mv = (MemberVo) session.getAttribute("user");
+		try {
+			HttpSession session = request.getSession(false);
+			MemberVo mv = (MemberVo) session.getAttribute("user");
+			
+			request.setCharacterEncoding("utf-8");
 
-		request.setCharacterEncoding("utf-8");
+			String mail = request.getParameter("mail");
+			String phone = request.getParameter("phone");
+			String addr = request.getParameter("addr");
+			String hobby = request.getParameter("hobby");
+			String id = request.getParameter("id");
 
-		String mail = request.getParameter("mail");
-		String phone = request.getParameter("phone");
-		String addr = request.getParameter("addr");
-		String hobby = request.getParameter("hobby");
-		String id = request.getParameter("id");
-		
-		mv.setEmail(mail);
-		mv.setPhone(phone);
-		mv.setAddress(addr);
-		mv.setHobby(hobby);
-		mv.setUserId(id);
-		
-		int result = new MemberService().memberUpdate(mv);
+			mv.setEmail(mail);
+			mv.setPhone(phone);
+			mv.setAddress(addr);
+			mv.setHobby(hobby);
+			mv.setUserId(id);
+
+			int result = new MemberService().memberUpdate(mv);
+
+			if (result > 0) {
+				RequestDispatcher view = request.getRequestDispatcher("/Views/member/memberUpdateSuccess.jsp");
+				request.setAttribute("userList", result);
+				view.forward(request, response);
+			} else {
+				response.sendRedirect("/Views/member/memberUpdateFail.jsp");
+			}
+		} catch (Exception e) {
+			response.sendRedirect("/Views/member/errorpage.jsp");
+		}
+
 
 	}
 

@@ -146,7 +146,26 @@ public class MemberDAO {
 	}
 
 	public int memberUpdate(Connection conn, MemberVo mv) {
-		return 0;
+		
+		int result = 0;
+		String query = prop.getProperty("memberUpdate");
+
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, mv.getEmail());
+			psmt.setString(2, mv.getPhone());
+			psmt.setString(3, mv.getAddress());
+			psmt.setString(4, mv.getHobby());
+			psmt.setString(5, mv.getUserId());
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
 	}
 
 }

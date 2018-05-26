@@ -24,22 +24,20 @@ public class MypageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = null;
-		MemberVo mv = null;
-		MemberVo member = null;
 		try {
-			session = request.getSession(false);
-			mv = (MemberVo) session.getAttribute("user");
-			member = new MemberService().memberLogin(mv.getUserId(), mv.getUserPwd());
+			HttpSession session = request.getSession(false);
+			MemberVo mv = (MemberVo) session.getAttribute("user");
+			MemberVo member = new MemberService().memberLogin(mv.getUserId(), mv.getUserPwd());
+			
+			if (member == null) {
+				response.sendRedirect("/Views/member/noMyinfo.jsp");
+			} else {
+				RequestDispatcher view = request.getRequestDispatcher("/Views/member/myPage.jsp");
+				request.setAttribute("memberInfo", member);
+				view.forward(request, response);
+			}
 		} catch (Exception e) {
-		}
-
-		if (member == null) {
-			response.sendRedirect("/Views/member/noMyinfo.jsp");
-		} else {
-			RequestDispatcher view = request.getRequestDispatcher("/Views/member/myPage.jsp");
-			request.setAttribute("memberInfo", member);
-			view.forward(request, response);
+			response.sendRedirect("/Views/member/errorpage.jsp");
 		}
 	}
 
