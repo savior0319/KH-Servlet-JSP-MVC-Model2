@@ -3,7 +3,7 @@
   <display-name>web2</display-name>
   <error-page>
     <error-code>404</error-code>
-    <location>/Views/member/errorpage.jsp</location>
+    <location>/Views/member/pageNotFound.jsp</location>
   </error-page>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
