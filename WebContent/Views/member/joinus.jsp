@@ -106,24 +106,8 @@
 				}
 			});
 		}
-
-	/* 	var windowW = 475; // 팝업 창 가로 길이
-	var windowH = 150; // 팝업 창 세로 길이
-	var left = Math.ceil((window.screen.width - windowW) / 2);
-	var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
-	window.open("idCheckPop.jsp", "_blank", "l top=" + top + ", left=" + left + ", height=" + windowH + ", width=" +
-		windowW); */
 	}
 
-	/* 	$(document).ready(function() {
-			$('#id').focus(function() {
-				idDuplicateCheck();
-			});
-
-			$('#id').click(function() {
-				idDuplicateCheck();
-			});
-		}); */
 
 	// 가입 버튼
 	function submitBtn() {
