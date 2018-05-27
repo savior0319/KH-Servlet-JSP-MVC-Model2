@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.g"%>
 <%@page import="java.io.UncheckedIOException"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="jsp.member.model.vo.MemberVo"%>
@@ -15,6 +16,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>회원 전체 조회</title>
 </head>
 
@@ -58,7 +60,7 @@
 							gender = "여자";
 			%>
 			<tr>
-				<td><%=m.getUserId()%></td>
+				<td id="value"><%=m.getUserId()%></td>
 				<td><%=m.getUserName()%></td>
 				<td><%=m.getAge()%></td>
 				<td><%=m.getEmail()%></td>
@@ -68,10 +70,11 @@
 				<td><%=m.getHobby()%></td>
 				<td><%=m.getEnrollDate()%></td>
 				<td>
+					<%-- <button onclick="activeBtn();" style="width: 100%"><%=m.getActivation()%></button> --%>
 					<form action="/memberActivation" method="post">
-						<input type="hidden" name="activation" value="<%=m.getActivation()%>">
-						<input type="hidden" name="userId" value="<%=m.getUserId()%>">
-						<input type="submit" value="<%=m.getActivation()%>" style="width: 100%" id="btn">
+						<input type="hidden" id="activation" name="activation" value="<%=m.getActivation()%>">
+						<input type="hidden" id="userId" name="userId" value="<%=m.getUserId()%>">
+						<input type="submit" value="<%=m.getActivation()%>" style="width: 100%" id="btn" onclick="test();">
 					</form>
 				</td>
 			</tr>
@@ -92,6 +95,10 @@
 	function back() {
 		history.back(-1);
 	}
+
+	/* 	function test() {
+			alert($('#value').html());
+		} */
 </script>
 
 </html>
