@@ -28,7 +28,7 @@ public class MypageServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			MemberVo mv = (MemberVo) session.getAttribute("user");
 			MemberVo member = new MemberService().memberLogin(mv.getUserId(), mv.getUserPwd());
-			
+
 			if (member == null) {
 				response.sendRedirect("/Views/member/noMyinfo.jsp");
 			} else {

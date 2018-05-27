@@ -31,29 +31,29 @@
 			</h4>
 			<form action="/joinus" method="get">
 				아이디
-				<input type="text" name="id" id="id" placeholder="아이디" required readonly>
+				<input type="text" name="id" id="id" placeholder="아이디" readonly>
 				<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">아이디 중복체크</button>
 				<br>
 				비밀번호
-				<input type="password" name="pwd" id="pwd" placeholder="비밀번호" required>
+				<input type="password" name="pwd" id="pwd" placeholder="비밀번호">
 				<br>
 				비밀번호 확인
-				<input type="password" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인" required>
+				<input type="password" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인">
 				<br>
 				이름
-				<input type="text" name="name" id="name" placeholder="이름" required>
+				<input type="text" name="name" id="name" placeholder="이름">
 				<br>
 				나이
-				<input type="text" name="age" id="age" placeholder="나이" required>
+				<input type="text" name="age" id="age" placeholder="나이">
 				<br>
 				이메일
-				<input type="text" name="mail" id="mail" placeholder="이메일" required>
+				<input type="text" name="mail" id="mail" placeholder="이메일">
 				<br>
 				전화번호
-				<input type="text" name="phone" id="phone" placeholder="전화번호" required>
+				<input type="text" name="phone" id="phone" placeholder="전화번호">
 				<br>
 				주소
-				<input type="text" name="addr" id="addr" placeholder="주소" required>
+				<input type="text" name="addr" id="addr" placeholder="주소">
 				<br>
 				성별
 				<input type="radio" name="gender" id="genderM" value="M">
@@ -62,10 +62,10 @@
 				여
 				<br>
 				취미
-				<input type="text" name="hobby" id="hobby" placeholder="취미" required>
+				<input type="text" name="hobby" id="hobby" placeholder="취미">
 				<br>
 				<br>
-				<input type="submit" value="회원가입">
+				<input type="submit" value="회원가입" onclick="return submitBtn();">
 				<button type="button" onclick="back();">취소</button>
 			</form>
 		</fieldset>
@@ -73,6 +73,8 @@
 </body>
 
 <script>
+	window.onload = function() {}
+
 	function back() {
 		history.back(-1);
 	}
@@ -95,6 +97,17 @@
 			idDuplicateCheck();
 		});
 	});
+
+	function submitBtn() {
+		if (document.getElementById('id').value == '' || document.getElementById('pwd').value == '' || document.getElementById(
+				'pwdRe').value == '' || document.getElementById('name').value == '' || document.getElementById('age').value == '' ||
+			document.getElementById('mail').value == '' || document.getElementById('phone').value == '' || document.getElementById(
+				'addr').value == '' || document.getElementById('hobby').value == '' || ($('#genderM').is(":checked") == false &&
+			$('#genderF').is(":checked") == false)) {
+			alert('입력하지 않은 항목이 있습니다');
+			return false;
+		} else return true;
+	}
 </script>
 
 </html>

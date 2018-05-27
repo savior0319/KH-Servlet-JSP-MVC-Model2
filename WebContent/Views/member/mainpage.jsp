@@ -71,7 +71,14 @@
 <script>
 	window.onload = function() {
 		document.getElementById("adminOnly").style.display = 'none';
+		document.getElementById("pwdChk").style.display = 'none';
 	}
+
+	$(document).ready(function() {
+		$('#myPage').click(function() {
+			$('#pwdChk').fadeIn(500);
+		});
+	});
 </script>
 <%
 	}
