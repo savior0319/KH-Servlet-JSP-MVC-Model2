@@ -33,6 +33,7 @@
 				아이디
 				<input type="text" name="id" id="id" placeholder="아이디">
 				<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">아이디 중복체크</button>
+				<span id="idCheckMessage"></span>
 				<br>
 				비밀번호
 				<input type="password" name="pwd" id="pwd" placeholder="비밀번호">
@@ -84,7 +85,8 @@
 	}
 
 	// 아이디 중복체크 AJAX
-	function idDuplicateCheck() {
+	$('#id').keyup(function() {
+		// function idDuplicateCheck() {
 		var id = $('#id').val();
 
 		if (id == "") {
@@ -98,16 +100,18 @@
 				},
 				success : function(result) {
 					if (result == 1) {
-						alert('이미 사용중인 아이디 입니다');
+						/* 	alert('이미 사용중인 아이디 입니다'); */
+						$('#idCheckMessage').html('<br>이미 사용중인 아이디 입니다').css('color', 'red').css('font-size', '14px');
 					} else {
-						alert('사용 가능한 아이디 입니다');
+						/* 	alert('사용 가능한 아이디 입니다'); */
+						$('#idCheckMessage').html('<br>사용 가능한 아이디 입니다').css('color', 'blue').css('font-size', '14px');
 						idCheck1 = id;
 					}
 				}
 			});
 		}
-	}
-
+	// }
+	});
 
 	// 가입 버튼
 	function submitBtn() {
@@ -124,8 +128,7 @@
 		} else if (idCheck1 != idCheck2) {
 			alert('아이디 중복체크를 확인해주세요');
 			return false;
-		}
-		else return true;
+		} else return true;
 	}
 </script>
 
