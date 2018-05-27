@@ -31,7 +31,7 @@
 			</h4>
 			<form action="/joinus" method="get">
 				아이디
-				<input type="text" name="id" id="id" placeholder="아이디" readonly>
+				<input type="text" name="id" id="id" placeholder="아이디">
 				<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">아이디 중복체크</button>
 				<br>
 				비밀번호
@@ -80,23 +80,40 @@
 	}
 
 	function idDuplicateCheck() {
-		var windowW = 475; // 팝업 창 가로 길이
-		var windowH = 150; // 팝업 창 세로 길이
-		var left = Math.ceil((window.screen.width - windowW) / 2);
-		var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
-		window.open("idCheckPop.jsp", "_blank", "l top=" + top + ", left=" + left + ", height=" + windowH + ", width=" +
-			windowW);
+		var id = $('#id').val();
+
+		$.ajax({
+			type : 'POST',
+			url : '/idcheck',
+			data : {
+				id : id
+			},
+			success : function(result) {
+				if (result == 1) {
+					alert('이미 사용중인 아이디 입니다');
+				} else {
+					alert('사용 가능한 아이디 입니다');
+				}
+			}
+		});
+
+	/* 	var windowW = 475; // 팝업 창 가로 길이
+	var windowH = 150; // 팝업 창 세로 길이
+	var left = Math.ceil((window.screen.width - windowW) / 2);
+	var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
+	window.open("idCheckPop.jsp", "_blank", "l top=" + top + ", left=" + left + ", height=" + windowH + ", width=" +
+		windowW); */
 	}
 
-	$(document).ready(function() {
-		$('#id').focus(function() {
-			idDuplicateCheck();
-		});
+	/* 	$(document).ready(function() {
+			$('#id').focus(function() {
+				idDuplicateCheck();
+			});
 
-		$('#id').click(function() {
-			idDuplicateCheck();
-		});
-	});
+			$('#id').click(function() {
+				idDuplicateCheck();
+			});
+		}); */
 
 	function submitBtn() {
 		if (document.getElementById('id').value == '' || document.getElementById('pwd').value == '' || document.getElementById(

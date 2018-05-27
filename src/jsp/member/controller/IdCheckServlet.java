@@ -22,16 +22,17 @@ public class IdCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		int result = new MemberService().idCheck(userId);
+		String userId = request.getParameter("id");
+		response.getWriter().write(String.valueOf(new MemberService().idCheck(userId)));
 
-		if (result == 1) {
-			response.sendRedirect("/Views/member/idAlreadyUsed.jsp");
-		} else {
-			RequestDispatcher view = request.getRequestDispatcher("/Views/member/idCanUse.jsp");
-			request.setAttribute("userId", userId);
-			view.forward(request, response);
-		}
+		// if (result == 1) {
+		// response.sendRedirect("/Views/member/idAlreadyUsed.jsp");
+		// } else {
+		// RequestDispatcher view =
+		// request.getRequestDispatcher("/Views/member/idCanUse.jsp");
+		// request.setAttribute("userId", userId);
+		// view.forward(request, response);
+		// }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
