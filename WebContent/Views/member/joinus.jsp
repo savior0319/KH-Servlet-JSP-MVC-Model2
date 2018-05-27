@@ -73,29 +73,39 @@
 </body>
 
 <script>
+	// 전역 변수 선언
+	var idCheck1 = "",
+		idCheck2 = "";
+
 	window.onload = function() {}
 
 	function back() {
 		history.back(-1);
 	}
 
+	// 아이디 중복체크 AJAX
 	function idDuplicateCheck() {
 		var id = $('#id').val();
 
-		$.ajax({
-			type : 'POST',
-			url : '/idcheck',
-			data : {
-				id : id
-			},
-			success : function(result) {
-				if (result == 1) {
-					alert('이미 사용중인 아이디 입니다');
-				} else {
-					alert('사용 가능한 아이디 입니다');
+		if (id == "") {
+			alert('아이디를 입력해주세요');
+		} else {
+			$.ajax({
+				type : 'POST',
+				url : '/idcheck',
+				data : {
+					id : id
+				},
+				success : function(result) {
+					if (result == 1) {
+						alert('이미 사용중인 아이디 입니다');
+					} else {
+						alert('사용 가능한 아이디 입니다');
+						idCheck1 = id;
+					}
 				}
-			}
-		});
+			});
+		}
 
 	/* 	var windowW = 475; // 팝업 창 가로 길이
 	var windowH = 150; // 팝업 창 세로 길이
@@ -115,7 +125,11 @@
 			});
 		}); */
 
+	// 가입 버튼
 	function submitBtn() {
+		var id = $('#id').val();
+		idCheck2 = id;
+
 		if (document.getElementById('id').value == '' || document.getElementById('pwd').value == '' || document.getElementById(
 				'pwdRe').value == '' || document.getElementById('name').value == '' || document.getElementById('age').value == '' ||
 			document.getElementById('mail').value == '' || document.getElementById('phone').value == '' || document.getElementById(
@@ -123,7 +137,11 @@
 			$('#genderF').is(":checked") == false)) {
 			alert('입력하지 않은 항목이 있습니다');
 			return false;
-		} else return true;
+		} else if (idCheck1 != idCheck2) {
+			alert('아이디 중복체크를 확인해주세요');
+			return false;
+		}
+		else return true;
 	}
 </script>
 
