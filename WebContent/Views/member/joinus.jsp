@@ -32,7 +32,8 @@
 			<form action="/joinus" method="get">
 				아이디
 				<input type="text" name="id" id="id" placeholder="아이디">
-				<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">아이디 중복체크</button>
+				<!-- 			<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">
+				아이디 중복체크</button> -->
 				<span id="idCheckMessage"></span>
 				<br>
 				비밀번호
