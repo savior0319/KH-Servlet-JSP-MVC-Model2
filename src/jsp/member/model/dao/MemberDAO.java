@@ -178,7 +178,7 @@ public class MemberDAO {
 			psmt.setString(1, userId);
 
 			rs = psmt.executeQuery();
-			
+
 			while (rs.next()) {
 				getPwd = rs.getString("USERPWD");
 			}
@@ -189,6 +189,29 @@ public class MemberDAO {
 			JDBCTemplate.close(psmt);
 		}
 		return getPwd;
+	}
+
+	public int idCheck(Connection conn, String userId) {
+		
+		int result = 0;
+
+		String query = prop.getProperty("idCheck");
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, userId);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				result = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(psmt);
+		}
+		return result;
 	}
 
 }

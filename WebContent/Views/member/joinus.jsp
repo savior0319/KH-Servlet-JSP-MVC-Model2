@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>회원가입</title>
 </head>
@@ -30,8 +31,8 @@
 			</h4>
 			<form action="/joinus" method="get">
 				아이디
-				<input type="text" name="id" id="id" placeholder="아이디" required>
-				<button type="button">아이디 중복체크</button>
+				<input type="text" name="id" id="id" placeholder="아이디" required readonly>
+				<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">아이디 중복체크</button>
 				<br>
 				비밀번호
 				<input type="password" name="pwd" id="pwd" placeholder="비밀번호" required>
@@ -75,6 +76,25 @@
 	function back() {
 		history.back(-1);
 	}
+
+	function idDuplicateCheck() {
+		var windowW = 475; // 팝업 창 가로 길이
+		var windowH = 150; // 팝업 창 세로 길이
+		var left = Math.ceil((window.screen.width - windowW) / 2);
+		var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
+		window.open("idCheckPop.jsp", "_blank", "l top=" + top + ", left=" + left + ", height=" + windowH + ", width=" +
+			windowW);
+	}
+
+	$(document).ready(function() {
+		$('#id').focus(function() {
+			idDuplicateCheck();
+		});
+
+		$('#id').click(function() {
+			idDuplicateCheck();
+		});
+	});
 </script>
 
 </html>

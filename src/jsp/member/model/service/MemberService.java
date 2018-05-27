@@ -81,4 +81,11 @@ public class MemberService {
 		return getPwd;
 	}
 
+	public int idCheck(String userId) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.idCheck(conn, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

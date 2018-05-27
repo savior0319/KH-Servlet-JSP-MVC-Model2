@@ -90,7 +90,7 @@
 
 <script>
 	function back() {
-		window.location.href = "/index.jsp";
+		history.back(-1);
 	}
 </script>
 
