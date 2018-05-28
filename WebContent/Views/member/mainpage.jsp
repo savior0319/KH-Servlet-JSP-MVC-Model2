@@ -13,7 +13,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<title>메인</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"
+>
+</script>
+
+<title>메인페이지</title>
 </head>
 
 <style>
@@ -26,13 +31,19 @@
 	font-size: 14px;
 	color: red;
 }
+
+.jumbotron {
+	text-align: center;
+	background: skyblue;
+}
 </style>
 
 <body>
-	<div class="wrapper">
+	<div class="jumbotron">
 		<h1>
-			<%=mv.getUserName() + "님 환영합니다"%>
-		</h1>
+			<%=mv.getUserName() + "님 환영합니다"%></h1>
+	</div>
+	<div class="wrapper">
 		<h3>
 			<br>
 			<a href="#" id="myPage">마이페이지</a>

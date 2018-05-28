@@ -28,6 +28,11 @@
 	margin: 0 auto;
 	text-align: center;
 }
+
+.jumbotron {
+	text-align: center;
+	background: skyblue;
+}
 </style>
 
 <%
@@ -37,23 +42,27 @@
 %>
 
 <body>
-	<div class="wrapper">
-		<br>
+
+	<div class="jumbotron">
 		<h1>관리자 : 회원 관리 페이지</h1>
+	</div>
+	<div class="wrapper">
 		<hr>
-		<table class="table table-striped">
-			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>나이</th>
-				<th>이메일</th>
-				<th>휴대폰</th>
-				<th>주소</th>
-				<th>성별</th>
-				<th>취미</th>
-				<th>가입날짜</th>
-				<th>활성여부</th>
-			</tr>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>나이</th>
+					<th>이메일</th>
+					<th>휴대폰</th>
+					<th>주소</th>
+					<th>성별</th>
+					<th>취미</th>
+					<th>가입날짜</th>
+					<th>활성여부</th>
+				</tr>
+			</thead>
 			<%
 				for (MemberVo m : aList) {
 						String gender = "";

@@ -43,28 +43,29 @@ table {
 	display: table;
 	margin: 0 auto;
 	text-align: center;
+	width: 900px;
 }
 
-#test {
-	width: 700px;
-}
-
-#searchBtn {
-	margin-left: 15px;
+.jumbotron {
+	text-align: center;
+	background: skyblue;
 }
 
 .searchWrapper {
 	margin: 0 auto;
 	display: table;
 }
+
+#searchBtn {
+	margin-left: 15px;
+}
 </style>
 
 <body>
-	<div class="wrapper">
-		<br>
+	<div class="jumbotron">
 		<h1>공지사항</h1>
-		<hr id="test">
-		<br>
+	</div>
+	<div class="wrapper">
 		<center>
 			<table class="table">
 				<thead class="thead-light">
