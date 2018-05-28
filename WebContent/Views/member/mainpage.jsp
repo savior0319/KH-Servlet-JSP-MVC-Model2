@@ -22,7 +22,7 @@
 	display: table;
 }
 
-#pwdField {
+.pwdField {
 	font-size: 14px;
 	color: red;
 }
@@ -36,31 +36,43 @@
 		<h3>
 			<br>
 			<a href="#" id="myPage">마이페이지</a>
-			<form action="/pwdcheck" method="post" id="pwdChk">
-				<div id="pwdField">
+			<form action="/pwdcheck" method="post" id="pwdChk" style="display: none">
+				<div class="pwdField">
 					<br>
-					비밀번호 입력
+					비밀번호를 입력하세요
 					<input type="password" name="userPwd" id="userPwd">
 				</div>
 			</form>
 			<br>
 			<a href="/logout">로그아웃</a>
 			<br>
-			<a href="#">회원탈퇴</a>
+			<a href="#" id="userDelete">회원탈퇴</a>
+			<form action="/pwdcheck1" method="post" id="pwdChk1" style="display: none">
+				<div class="pwdField">
+					<br>
+					비밀번호를 입력하세요
+					<input type="password" name="userPwd1" id="userPwd1">
+				</div>
+			</form>
 			<br>
-			<a href="/allMember" id="adminOnly">전체 회원 조회</a>
+			<a href="/notice">공지사항</a>
+			<br>
+			<a href="/allMember" id="adminOnly" style="display: none">전체 회원 조회</a>
 		</h3>
 	</div>
 </body>
 
 <script>
 	window.onload = function() {
-		document.getElementById("pwdChk").style.display = 'none';
+		document.getElementById("adminOnly").style.display = "block";
 	}
-
 	$(document).ready(function() {
 		$('#myPage').click(function() {
-			$('#pwdChk').fadeIn(500);
+			$('#pwdChk').fadeIn(300);
+		});
+
+		$('#userDelete').click(function() {
+			$('#pwdChk1').fadeIn(300);
 		});
 	});
 </script>
@@ -69,14 +81,13 @@
 	if (!mv.getUserId().equals("admin")) {
 %>
 <script>
-	window.onload = function() {
-		document.getElementById("adminOnly").style.display = 'none';
-		document.getElementById("pwdChk").style.display = 'none';
-	}
-
 	$(document).ready(function() {
 		$('#myPage').click(function() {
-			$('#pwdChk').fadeIn(500);
+			$('#pwdChk').fadeIn(300);
+		});
+
+		$('#userDelete').click(function() {
+			$('#pwdChk1').fadeIn(300);
 		});
 	});
 </script>

@@ -16,7 +16,7 @@
 </head>
 
 <script>
-	alert('회원 정보 변경 완료');
+	alert('회원 정보 변경 실패');
 	history.back(-1);
 </script>
 

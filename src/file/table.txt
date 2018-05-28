@@ -32,3 +32,25 @@ UPDATE MEMBER SET ACTIVATION = 'y';
 
 commit;
 
+
+/*
+select * from member;
+
+TRUNCATE TABLE MEMBER;
+
+commit;
+
+ALTER TABLE MEMBER ADD(last_modified DATE); -- 비밀번호 변경일 추가
+
+UPDATE MEMBER SET LAST_MODIFIED = SYSDATE;
+
+
+UPDATE MEMBER SET LAST_MODIFIED = TO_DATE('18/01/01') WHERE USERID = 'admin';
+
+SELECT FLOOR(SYSDATE - LAST_MODIFIED) FROM MEMBER WHERE USERID = 'admin';
+
+delete from member where userid = '1';
+
+select userpwd from member where userid = 'admin';
+*/
+

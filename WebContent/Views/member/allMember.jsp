@@ -1,4 +1,3 @@
-<%@page import="oracle.net.aso.g"%>
 <%@page import="java.io.UncheckedIOException"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="jsp.member.model.vo.MemberVo"%>
@@ -96,9 +95,6 @@
 		history.back(-1);
 	}
 
-	/* 	function test() {
-			alert($('#value').html());
-		} */
 </script>
 
 </html>

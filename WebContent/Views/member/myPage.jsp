@@ -36,6 +36,9 @@
 					아이디
 					<input type="text" name="id" value="<%=mv.getUserId()%>" readonly="readonly">
 					<br>
+					비밀번호
+					<input type="password" name="pw" value="" id="pwd">
+					<br>
 					이름
 					<input type="text" name="name" readonly="readonly" value="<%=mv.getUserName()%>">
 					<br>
@@ -63,7 +66,7 @@
 					<input type="text" value="<%=mv.getEnrollDate()%>" readonly="readonly">
 					<br>
 					<br>
-					<input type="submit" value="수정하기">
+					<input type="submit" value="수정하기" onclick="return btn();">
 					<button type="button" onclick="back();">뒤로가기</button>
 				</form>
 			</fieldset>
@@ -75,6 +78,14 @@
 	function back() {
 		history.back(-1);
 	}
+	
+	function btn(){
+		if(document.getElementById("pwd").value == ""){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+	}
+	
 </script>
 
 </html>

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page errorPage="errorpage.jsp"%>
 <%
 	String strReferer = request.getHeader("referer");
 
@@ -7,7 +6,8 @@
 %>
 <script>
 	alert("정상적인 경로를 통해 다시 접근하세요.");
-	window.location.href = "/index.jsp";
+	document.location.href = "/index.jsp";
+	history.back(-1);
 </script>
 <%
 	}
@@ -19,12 +19,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<title>오류</title>
 </head>
 
-<script>
-	alert('회원가입이 완료 되었습니다');
-	window.location.href = "/index.jsp";
+<script type="text/javascript">
+	alert('공지 정보가 없습니다');
+	history.back(-1);
 </script>
 
 </html>

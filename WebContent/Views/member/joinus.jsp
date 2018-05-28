@@ -31,16 +31,14 @@
 			</h4>
 			<form action="/joinus" method="get">
 				아이디
-				<input type="text" name="id" id="id" placeholder="아이디">
-				<!-- 			<button type="button" id="idDuplicateCheckBtn" onclick="idDuplicateCheck();">
-				아이디 중복체크</button> -->
+				<input type="text" name="id" id="id" placeholder="아이디" pattern="^[a-z0-9_]{4,16}$">
 				<span id="idCheckMessage"></span>
 				<br>
 				비밀번호
-				<input type="password" name="pwd" id="pwd" placeholder="비밀번호">
+				<input type="password" name="pwd" id="pwd" placeholder="비밀번호" pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
 				<br>
 				비밀번호 확인
-				<input type="password" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인">
+				<input type="password" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인" pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
 				<br>
 				이름
 				<input type="text" name="name" id="name" placeholder="이름">
@@ -87,11 +85,10 @@
 
 	// 아이디 중복체크 AJAX
 	$('#id').keyup(function() {
-		// function idDuplicateCheck() {
 		var id = $('#id').val();
-
 		if (id == "") {
-			alert('아이디를 입력해주세요');
+			// 빈 칸일때 backspace 방지
+			$('#idCheckMessage').html("");
 		} else {
 			$.ajax({
 				type : 'POST',
@@ -101,17 +98,14 @@
 				},
 				success : function(result) {
 					if (result == 1) {
-						/* 	alert('이미 사용중인 아이디 입니다'); */
 						$('#idCheckMessage').html('<br>이미 사용중인 아이디 입니다').css('color', 'red').css('font-size', '14px');
 					} else {
-						/* 	alert('사용 가능한 아이디 입니다'); */
 						$('#idCheckMessage').html('<br>사용 가능한 아이디 입니다').css('color', 'blue').css('font-size', '14px');
 						idCheck1 = id;
 					}
 				}
 			});
 		}
-	// }
 	});
 
 	// 가입 버튼
@@ -127,9 +121,13 @@
 			alert('입력하지 않은 항목이 있습니다');
 			return false;
 		} else if (idCheck1 != idCheck2) {
-			alert('아이디 중복체크를 확인해주세요');
+			alert('아이디를 확인해주세요');
 			return false;
-		} else return true;
+		} else if ($('#pwd').val() != $('#pwdRe').val()) {
+			alert('비밀번호 확인이 일치하지 않습니다');
+			return false;
+		}
+		else return true;
 	}
 </script>
 

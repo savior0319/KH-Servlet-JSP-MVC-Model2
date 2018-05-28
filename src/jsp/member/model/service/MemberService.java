@@ -88,4 +88,24 @@ public class MemberService {
 		return result;
 	}
 
+	public int userDel(String userId) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.userDel(conn, userId);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else
+			JDBCTemplate.rollBack(conn);
+
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int changePwdCheck(String userId) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.changePwdCheck(conn, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

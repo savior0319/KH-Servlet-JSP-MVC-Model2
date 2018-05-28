@@ -147,25 +147,70 @@ public class MemberDAO {
 
 	public int memberUpdate(Connection conn, MemberVo mv) {
 
+		String originPwd = "";
 		int result = 0;
-		String query = prop.getProperty("memberUpdate");
-
 		try {
-			psmt = conn.prepareStatement(query);
-			psmt.setString(1, mv.getEmail());
-			psmt.setString(2, mv.getPhone());
-			psmt.setString(3, mv.getAddress());
-			psmt.setString(4, mv.getHobby());
-			psmt.setString(5, mv.getUserId());
+			psmt = conn.prepareStatement("select userpwd from member where userid = ?");
+			psmt.setString(1, mv.getUserId());
 
-			result = psmt.executeUpdate();
+			rs = psmt.executeQuery();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+			while (rs.next()) {
+				originPwd = rs.getString("userpwd");
+			}
+
+			System.out.println(originPwd + " -> 변경 전 ");
+			System.out.println(mv.getUserPwd() + " -> 변경 후 ");
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		} finally {
-			JDBCTemplate.close(psmt);
+			JDBCTemplate.close(rs);
 		}
-		return result;
+
+		if (!originPwd.equals(mv.getUserPwd())) {
+
+			String query = prop.getProperty("memberUpdate1");
+
+			try {
+				psmt = conn.prepareStatement(query);
+				psmt.setString(1, mv.getEmail());
+				psmt.setString(2, mv.getPhone());
+				psmt.setString(3, mv.getAddress());
+				psmt.setString(4, mv.getHobby());
+				psmt.setString(5, mv.getUserPwd());
+				psmt.setString(6, mv.getUserId());
+
+				result = psmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(psmt);
+			}
+			return result;
+
+		} else {
+			String query = prop.getProperty("memberUpdate2");
+
+			try {
+				psmt = conn.prepareStatement(query);
+				psmt.setString(1, mv.getEmail());
+				psmt.setString(2, mv.getPhone());
+				psmt.setString(3, mv.getAddress());
+				psmt.setString(4, mv.getHobby());
+				psmt.setString(5, mv.getUserPwd());
+				psmt.setString(6, mv.getUserId());
+
+				result = psmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(psmt);
+			}
+			return result;
+		}
 	}
 
 	public String chekPwd(Connection conn, String userId) {
@@ -192,7 +237,7 @@ public class MemberDAO {
 	}
 
 	public int idCheck(Connection conn, String userId) {
-		
+
 		int result = 0;
 
 		String query = prop.getProperty("idCheck");
@@ -214,4 +259,51 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int userDel(Connection conn, String userId) {
+
+		int result = 0;
+
+		String query = prop.getProperty("userDel");
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, userId);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
+
+	public int changePwdCheck(Connection conn, String userId) {
+
+		int result = 0;
+		String query = prop.getProperty("changePwdCheck");
+
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, userId);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+
+				if (rs.getInt(1) >= 90) {
+					result = 1;
+				} else {
+					result = 0;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
 }

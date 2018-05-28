@@ -35,13 +35,15 @@ public class MemberUpdateServlet extends HttpServlet {
 			String addr = request.getParameter("addr");
 			String hobby = request.getParameter("hobby");
 			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
 
 			mv.setEmail(mail);
 			mv.setPhone(phone);
 			mv.setAddress(addr);
 			mv.setHobby(hobby);
 			mv.setUserId(id);
-
+			mv.setUserPwd(pw);
+			
 			int result = new MemberService().memberUpdate(mv);
 
 			if (result > 0) {

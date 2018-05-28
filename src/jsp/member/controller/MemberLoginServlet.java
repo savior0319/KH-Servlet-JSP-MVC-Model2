@@ -23,19 +23,24 @@ public class MemberLoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		mv = mService.memberLogin(userId, userPwd);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", mv);
-		
+
 		if (mv != null) {
 			if (!mv.getActivation().equals("y")) {
 				response.sendRedirect("/Views/member/loginNoActivation.jsp");
 			} else {
-				response.sendRedirect("/Views/member/loginSuccess.jsp");
+				int result = new MemberService().changePwdCheck(userId);
+				if (result == 1) {
+					response.sendRedirect("/Views/member/pwdNeedChange.jsp");
+				} else {
+					response.sendRedirect("/Views/member/loginSuccess.jsp");
+				}
 			}
 		} else {
 			response.sendRedirect("/Views/member/loginFail.jsp");

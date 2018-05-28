@@ -13,41 +13,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous"
+>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<title>index</title>
 </head>
 
 <style>
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-
-fieldset {
-	padding: 40px;
-}
-
-#userId {
-	line-height: 30px;
-}
-
-#userPwd {
-	line-height: 30px;
-}
-
 .wrapper {
-	display: table;
 	margin: 0 auto;
-	text-align: center;
+	display: table;
 }
 
-#loginBtn {
-	height: 70px;
-	width: 80px;
-}
-
-input:focus {
-	border: 2px solid red;
+.login-form {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin: 0 auto;
 }
 </style>
 
@@ -59,34 +41,22 @@ input:focus {
 	%>
 	<div class="wrapper">
 		<br>
-		<h1>index</h1>
+		<h1>로그인</h1>
 		<br>
-		<fieldset>
-			<legend>로그인</legend>
-			<form action="/memberLogin" method="post">
-				<table>
-					<tr>
-						<td>아이디</td>
-						<td>
-							<input type="text" name="userId" id="userId" placeholder="아이디 입력" required pattern="^[a-z0-9_]{4,16}$">
-						</td>
-						<td rowspan="2">
-							<input type="submit" value="로그인" id="loginBtn">
-						</td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td>
-							<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호입력" required pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
-						</td>
-					</tr>
-				</table>
-				<br>
-				<a href="/Views/member/joinus.jsp">회원가입</a>
-				<a href="/Views/member/idfind.jsp">ID 찾기</a>
-				<a href="/Views/member/pwchange.jsp">PW 변경</a>
-			</form>
-		</fieldset>
+		<form action="/memberLogin" method="POST" class="login-form">
+			<div class="form-group">
+				<label>아이디</label>
+				<input type="text" name="userId" class="form-control" id="userId" placeholder="아이디 입력" required pattern="^[a-z0-9_]{4,16}$">
+			</div>
+			<div class="form-group">
+				<label>비밀번호</label>
+				<input type="password" name="userPwd" class="form-control" id="userPwd" placeholder="비밀번호 입력" required pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
+			</div>
+			<button type="submit" class="btn btn-primary">로그인</button>
+			<button type="button" class="btn btn-primary" onclick="joinus();">회원가입</button>
+			<button type="button" class="btn btn-primary" onclick="idsearch();">ID찾기</button>
+			<button type="button" class="btn btn-primary" onclick="pwchange();">PW변경</button>
+		</form>
 	</div>
 </body>
 
@@ -96,6 +66,20 @@ input:focus {
 		history.go(1);
 	};
 </script> 뒤로가기 방지-->
+
+<script>
+	function joinus() {
+		window.location.href = "/Views/member/joinus.jsp";
+	}
+
+	function idfind() {
+		window.location.href = "/Views/member/idfind.jsp";
+	}
+
+	function pwchange() {
+		window.location.href = "/Views/member/pwchange.jsp";
+	}
+</script>
 
 <%
 	}
