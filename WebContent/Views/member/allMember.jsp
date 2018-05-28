@@ -15,7 +15,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <title>회원 전체 조회</title>
 </head>
 
@@ -35,9 +38,10 @@
 
 <body>
 	<div class="wrapper">
+		<br>
 		<h1>관리자 : 회원 관리 페이지</h1>
 		<hr>
-		<table border="1">
+		<table class="table table-striped">
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
@@ -73,7 +77,7 @@
 					<form action="/memberActivation" method="post">
 						<input type="hidden" id="activation" name="activation" value="<%=m.getActivation()%>">
 						<input type="hidden" id="userId" name="userId" value="<%=m.getUserId()%>">
-						<input type="submit" value="<%=m.getActivation()%>" style="width: 100%" id="btn" onclick="test();">
+						<input type="submit" value="<%=m.getActivation()%>" style="width: 100%" class="btn" onclick="test(this);">
 					</form>
 				</td>
 			</tr>
@@ -92,9 +96,11 @@
 
 <script>
 	function back() {
-		history.back(-1);
+		window.location.href = "/Views/member/mainpage.jsp";
 	}
-
+	/* 	function test(oper) {
+			var userId = $(oper).prev().val();
+		} */
 </script>
 
 </html>
