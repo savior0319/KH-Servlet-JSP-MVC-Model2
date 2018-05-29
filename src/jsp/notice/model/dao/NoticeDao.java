@@ -194,52 +194,61 @@ public class NoticeDao {
 		return sb.toString();
 	}
 
-	// 메뉴바 부분
-	// StringBuilder sb = new StringBuilder();
-	//
-	// if (needPrev) {
-	// sb.append("<a href='/notice?currentPage=" + (startNavi - 1) + "'> < </a>");
-	//
-	// // sb.append("<a href='/notice?currentPage=" + (startNavi - 5) + "'> <<
-	// </a>");
-	// // 5 페이지 앞으로
-	// // sb.append("<a href='/notice?currentPage=1'> <<< </a>");
-	// // 1 페이지로
-	// }
-	//
-	// for (int i = startNavi; i <= endNavi; i++) {
-	// if (i == currentPage) {
-	// sb.append("<a href='/notice?currentPage=" + i + "'><B> " + i + " </B></a>");
-	// } else {
-	// sb.append("<a href='/notice?currentPage=" + i + "'> " + i + " </a>");
-	// }
-	// }
-	//
-	// if (needNext) { // 끝 페이지가 아니라면
-	// sb.append("<a href='/notice?currentPage=" + (endNavi + 1) + "'> > </a>");
-	// }
-	//
-	// return sb.toString();
+	public ArrayList<NoticeVo> getCurrentPageSearch(Connection conn, int currentPage, int recordCountPerPage,
+			String title) {
 
-	// 제목으로 검색
-	public String noticeSearchTitle(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage,
+		ArrayList<NoticeVo> aList = new ArrayList<NoticeVo>();
+
+		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage * recordCountPerPage;
+
+		String query = prop.getProperty("getCurrentPageSearch");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%' + title + '%');
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NoticeVo nv = new NoticeVo();
+				nv.setNoticeNo(rs.getInt("noticeno"));
+				nv.setSubject(rs.getString("subject"));
+				nv.setContents(rs.getString("contents"));
+				nv.setUserId(rs.getString("userid"));
+				nv.setRegDate(rs.getDate("regdate"));
+
+				aList.add(nv);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return aList;
+
+	}
+
+	public String getPageNaviSearch(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage,
 			String title) {
 
 		int recordTotalCount = 0;
 
-		String query = prop.getProperty("getSearchTitleContents");
+		String query = prop.getProperty("getPageNaviSearch");
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%" + title + "%");
+			pstmt.setString(1, '%' + title + '%');
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				recordTotalCount = rs.getInt("totalcount");
 			}
-
-			System.out.println();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -281,22 +290,121 @@ public class NoticeDao {
 
 		StringBuilder sb = new StringBuilder();
 
+		sb.append("<ul class=\"pagination\">");
 		if (needPrev) {
-			sb.append("<a href='/notice?currentPage=" + (startNavi - 1) + "'> < </a>");
+			sb.append("<li class=\"page-item\"><a class=\"page-link\"href='/noticeSearch?title= " + title
+					+ "&currentPage=" + (startNavi - 1) + "'> 이전 </a></li>");
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			if (i == currentPage) {
-				sb.append("<a href='/notice?currentPage=" + i + "'><B> " + i + " </B></a>");
-			} else {
-				sb.append("<a href='/notice?currentPage=" + i + "'> " + i + " </a>");
-			}
+
+			sb.append("<li class=\"page-item\"><a class=\"page-link\"href='/noticeSearch?title=" + title
+					+ "&currentPage=" + i + "'>" + i + " </a></li>");
 		}
-		
+
 		if (needNext) {
-			sb.append("<a href='/notice?currentPage=" + (endNavi + 1) + "'> > </a>");
+			sb.append("<li class=\"page-item\"><a class=\"page-link\"href='/noticeSearch?title=" + title
+					+ "&currentPage=" + (endNavi + 1) + "'> 다음 </a></li>");
 		}
+		sb.append("</ul>");
 
 		return sb.toString();
 	}
+
+	public NoticeVo noticeSelect(Connection conn, int noticeNo) {
+
+		NoticeVo nv = null;
+
+		String query = prop.getProperty("noticeSelect");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				nv = new NoticeVo();
+				nv.setContents(rs.getString("contents"));
+				nv.setNoticeNo(rs.getInt("noticeno"));
+				nv.setUserId(rs.getString("userid"));
+				nv.setRegDate(rs.getDate("regdate"));
+				nv.setSubject(rs.getString("subject"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return nv;
+	}
+
+	public int noticeModify(Connection conn, int noticeNo, String subject, String content) {
+
+		int result = 0;
+
+		String query = prop.getProperty("noticeModify");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, subject);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, noticeNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public int noticeWrite(Connection conn, String subject, String content) {
+
+		int result = 0;
+
+		String query = prop.getProperty("noticeWrite");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, subject);
+			pstmt.setString(2, content);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// 메뉴바 부분
+	// StringBuilder sb = new StringBuilder();
+	//
+	// if (needPrev) {
+	// sb.append("<a href='/notice?currentPage=" + (startNavi - 1) + "'> < </a>");
+	//
+	// // sb.append("<a href='/notice?currentPage=" + (startNavi - 5) + "'> <<
+	// </a>");
+	// // 5 페이지 앞으로
+	// // sb.append("<a href='/notice?currentPage=1'> <<< </a>");
+	// // 1 페이지로
+	// }
+	//
+	// for (int i = startNavi; i <= endNavi; i++) {
+	// if (i == currentPage) {
+	// sb.append("<a href='/notice?currentPage=" + i + "'><B> " + i + " </B></a>");
+	// } else {
+	// sb.append("<a href='/notice?currentPage=" + i + "'> " + i + " </a>");
+	// }
+	// }
+	//
+	// if (needNext) { // 끝 페이지가 아니라면
+	// sb.append("<a href='/notice?currentPage=" + (endNavi + 1) + "'> > </a>");
+	// }
+	//
+	// return sb.toString();
 }

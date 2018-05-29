@@ -1,50 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Bootstrap</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"
->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"
-></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 
-<style>
-.wrapper {
-	margin: 0 auto;
-	display: table;
-}
-
-.login-form {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	margin: 0 auto;
-}
-</style>
-
 <body>
-	<div class="wrapper">
-		<form action="#" method="get" class="login-form">
-			<div class="form-group">
-				<label>아이디</label>
-				<input type="text" class="form-control" id="userId" placeholder="아이디 입력" required>
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" style="text-align: left;">업데이트 완료</h4>
+					<button type="button" class="close" data-dismiss="modal">x</button>
+				</div>
+				<div class="modal-body">
+
+				</div>
+				<!--<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>-->
 			</div>
-			<div class="form-group">
-				<label>비밀번호</label>
-				<input type="password" class="form-control" id="userPwd" placeholder="비밀번호 입력">
-			</div>
-			<button type="submit" class="btn btn-primary">로그인</button>
-		</form>
+		</div>
 	</div>
 </body>
 
-
 <script>
+	// A $( document ).ready() block.
+	$(document).ready(function () {
+		$('#myModal').modal({
+			show: true
+		});
+	});
 </script>
 
 </html>

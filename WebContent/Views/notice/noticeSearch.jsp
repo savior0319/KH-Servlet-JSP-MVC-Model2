@@ -32,9 +32,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<title>공지사항</title>
+<title>검색결과</title>
 </head>
 
 <style>
@@ -101,7 +100,7 @@ table {
 					<div class="form-group">
 						<input type="text" class="form-control" id="pwd" name="title" placeholder="제목입력">
 					</div>
-					<button type="submit" class="btn btn-primary" id="searchBtn">검색</button>
+					<button type="submit" class="btn "btn btn-primary"" id="searchBtn">검색</button>
 					&nbsp;
 					<button type="button" class="btn btn-success" id="writeBtn" style="display: none" onclick="noticeWrite();">글쓰기</button>
 				</form>

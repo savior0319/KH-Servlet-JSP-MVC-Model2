@@ -23,12 +23,10 @@ public class NoticeSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		// 2. 넘겨준 값 변수에 저장
+
 		String title = request.getParameter("title");
 
-		// 페이징 처리
 		int currentPage; // 현재 페이지 값을 저장하는 변수
 
 		if (request.getParameter("currentPage") == null) {
@@ -38,12 +36,13 @@ public class NoticeSearchServlet extends HttpServlet {
 		} // 첫 페이지는 1로 설정, 그 외 페이지는 해당 페이지의 값을 가져옴
 
 		// 3. 비즈니스 로직
-		PageDataVo pd = new NoticeService().noticeSearchTitle(currentPage, title);
+		PageDataVo pd = new NoticeService().noticeSearch(currentPage, title);
 
 		// 4. 결과값 JSP 출력
 		if (pd != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Views/notice/noticeList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Views/notice/noticeSearch.jsp");
 			request.setAttribute("pageData", pd);
+			request.setAttribute("search", title);
 			dispatcher.forward(request, response);
 		} else {
 			response.sendRedirect("/Views/error/noticeListNotFound.jsp");
