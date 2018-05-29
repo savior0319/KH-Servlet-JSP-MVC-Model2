@@ -381,6 +381,25 @@ public class NoticeDao {
 		return result;
 	}
 
+	public int noticeDelete(Connection conn, int noticeNo) {
+		
+		int result = 0;
+
+		String query = prop.getProperty("noticeDelete");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	// 메뉴바 부분
 	// StringBuilder sb = new StringBuilder();
 	//

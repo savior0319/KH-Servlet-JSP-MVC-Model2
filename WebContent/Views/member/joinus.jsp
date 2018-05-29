@@ -9,64 +9,129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <title>회원가입</title>
 </head>
 
 <style>
 .wrapper {
 	margin: 0 auto;
-	display: table;
 	text-align: center;
+}
+
+.jumbotron {
+	text-align: center;
+	background: skyblue;
+}
+
+fieldset {
+	width: 500px;
+	margin: 0 auto;
 }
 </style>
 
 <body>
 	<div class="wrapper">
+		<div class="jumbotron">
+			<h1>회원가입</h1>
+		</div>
 		<fieldset>
-			<legend>회원가입</legend>
-			<h4>
+			<h5>
 				가입할 회원 정보를 입력하세요
 				<br>
 				(*은 필수 입력 항목입니다)
-			</h4>
+			</h5>
 			<form action="/joinus" method="get">
-				아이디
-				<input type="text" name="id" id="id" placeholder="아이디" pattern="^[a-z0-9_]{4,16}$">
+
+				<br>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">아이디</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="id" id="id" placeholder="아이디" pattern="^[a-z0-9_]{4,16}$">
+				</div>
+
 				<span id="idCheckMessage"></span>
-				<br>
-				비밀번호
-				<input type="password" name="pwd" id="pwd" placeholder="비밀번호" pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
-				<br>
-				비밀번호 확인
-				<input type="password" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인" pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
-				<br>
-				이름
-				<input type="text" name="name" id="name" placeholder="이름">
-				<br>
-				나이
-				<input type="text" name="age" id="age" placeholder="나이">
-				<br>
-				이메일
-				<input type="text" name="mail" id="mail" placeholder="이메일">
-				<br>
-				전화번호
-				<input type="text" name="phone" id="phone" placeholder="전화번호">
-				<br>
-				주소
-				<input type="text" name="addr" id="addr" placeholder="주소">
-				<br>
-				성별
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
+					</div>
+					<input type="password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="pwd" id="pwd" placeholder="비밀번호" pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">비밀번호 확인</span>
+					</div>
+					<input type="password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="pwdRe" id="pwdRe" placeholder="비밀번호 확인"
+						pattern="^[a-zA-Z0-9!@#$%^&*()_+|-=\]{4,16}$"
+					>
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name" id="name" placeholder="이름">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">나이</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="age" id="age" placeholder="나이">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">이메일</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="mail" id="mail" placeholder="이메일">
+				</div>
+
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="phone" id="phone" placeholder="전화번호">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="addr" id="addr" placeholder="주소">
+				</div>
+				성별&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="gender" id="genderM" value="M">
-				남
+				남 &nbsp;&nbsp;&nbsp;
 				<input type="radio" name="gender" id="genderF" value="F">
 				여
 				<br>
-				취미
-				<input type="text" name="hobby" id="hobby" placeholder="취미">
 				<br>
-				<br>
-				<input type="submit" value="회원가입" onclick="return submitBtn();">
-				<button type="button" onclick="back();">취소</button>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">취미</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="hobby" id="hobby" placeholder="취미">
+				</div>
+				<div class="alert alert-danger" style="display: none" id="danger">
+					<strong>오류 : </strong> 입력하지 않은 항목이 있습니다!
+				</div>
+				<div class="alert alert-danger" style="display: none" id="idDanger">
+					<strong>오류 : </strong> 아이디를 확인해주세요
+				</div>
+				<div class="alert alert-danger" style="display: none" id="pwDanger">
+					<strong>오류 : </strong> 비밀번호 확인이 일치하지 않습니다
+				</div>
+				<input type="submit" class="btn btn-primary" value="회원가입" onclick="return submitBtn();">
+				<button type="button" class="btn btn-danger" onclick="back();">취소</button>
 			</form>
 		</fieldset>
 	</div>
@@ -98,9 +163,9 @@
 				},
 				success : function(result) {
 					if (result == 1) {
-						$('#idCheckMessage').html('<br>이미 사용중인 아이디 입니다').css('color', 'red').css('font-size', '14px');
+						$('#idCheckMessage').html('이미 사용중인 아이디 입니다<br><br>').css('color', 'red').css('font-size', '14px');
 					} else {
-						$('#idCheckMessage').html('<br>사용 가능한 아이디 입니다').css('color', 'blue').css('font-size', '14px');
+						$('#idCheckMessage').html('사용 가능한 아이디 입니다<br><br>').css('color', 'blue').css('font-size', '14px');
 						idCheck1 = id;
 					}
 				}
@@ -118,13 +183,19 @@
 			document.getElementById('mail').value == '' || document.getElementById('phone').value == '' || document.getElementById(
 				'addr').value == '' || document.getElementById('hobby').value == '' || ($('#genderM').is(":checked") == false &&
 			$('#genderF').is(":checked") == false)) {
-			alert('입력하지 않은 항목이 있습니다');
+			$('#idDanger').hide();
+			$('#pwDanger').hide();
+			$('#danger').show();
 			return false;
 		} else if (idCheck1 != idCheck2) {
-			alert('아이디를 확인해주세요');
+			$('#danger').hide();
+			$('#pwDanger').hide();
+			$('#idDanger').show();
 			return false;
 		} else if ($('#pwd').val() != $('#pwdRe').val()) {
-			alert('비밀번호 확인이 일치하지 않습니다');
+			$('#danger').hide();
+			$('#idDanger').hide();
+			$('#pwDanger').show();
 			return false;
 		}
 		else return true;

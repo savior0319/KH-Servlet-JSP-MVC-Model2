@@ -25,7 +25,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<title>경고</title>
+<title>삭제 완료</title>
 </head>
 
 <body>
@@ -33,11 +33,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" style="text-align: center;">
-						※ 비밀번호를 변경한지 90일이 지났습니다
-						<br>
-						보안 상 변경 하세요
-					</h5>
+					<h4 class="modal-title" style="text-align: left;">삭제 완료</h4>
 					<button type="button" class="close" data-dismiss="modal" onclick="back();">x</button>
 				</div>
 				<div class="modal-body"></div>
@@ -54,7 +50,7 @@
 	});
 
 	function back() {
-		window.location.href = "/Views/member/loginSuccess.jsp";
+		window.location.href = "/notice";
 	}
 </script>
 </html>

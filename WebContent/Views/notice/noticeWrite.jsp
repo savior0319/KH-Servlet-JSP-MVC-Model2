@@ -15,7 +15,6 @@
 <%
 	}
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +51,7 @@
 <body>
 	<center>
 		<div class="jumbotron">
-			<h1>공지사항</h1>
+			<h1>공지사항 작성</h1>
 		</div>
 
 		<form method="get" action="/noticeWrite">
@@ -63,13 +62,13 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="inputGroup-sizing-sm">글제목</span>
 							</div>
-							<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="" placeholder="공지 제목 작성" name="subject">
+							<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="" placeholder="공지제목" name="subject">
 						</div>
 						<hr>
 						<h6 class="card-subtitle mb-2 text-muted"></h6>
 						<p class="card-text">
 							<br>
-							<textarea class="form-control" rows="10" id="comment" placeholder="공지내용 작성"></textarea>
+							<textarea class="form-control" rows="10" id="comment" placeholder="공지내용" name="content"></textarea>
 						</p>
 				</div>
 			</div>

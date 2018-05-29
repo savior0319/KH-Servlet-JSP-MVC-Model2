@@ -83,9 +83,27 @@
 		<br>
 		<button type="button" class="btn btn-primary" onclick="back();">목록</button>
 		<button type="button" class="btn btn-warning" onclick="modify();" style="display: none" id="modify">수정</button>
-		<button type="button" class="btn btn-danger" onclick="delte();" style="display: none" id="delete">삭제</button>
+		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="display: none" id="delete">삭제</button>
 		<button type="button" class="btn btn-success" onclick="noticeWrite();" style="display: none" id="noticeWrite">글쓰기</button>
 	</center>
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">삭제 확인</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">정말 삭제 하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onclick="noticeDelete();">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script type="text/javascript">
@@ -110,6 +128,10 @@
 
 	function noticeWrite() {
 		window.location.href = "/Views/notice/noticeWrite.jsp";
+	}
+
+	function noticeDelete() {
+		window.location.href = "/noticeDelete?noticeNo=" + "<%=nv.getNoticeNo()%>";
 	}
 </script>
 <%

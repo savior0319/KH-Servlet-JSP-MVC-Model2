@@ -66,6 +66,8 @@ table {
 <body>
 	<div class="jumbotron">
 		<h1>공지사항</h1>
+		<br>
+		<button type="button" class="btn btn-success" id="writeBtn" onclick="back();">뒤로가기</button>
 	</div>
 	<div class="wrapper">
 		<center>
@@ -100,7 +102,7 @@ table {
 					<div class="form-group">
 						<input type="text" class="form-control" id="pwd" name="title" placeholder="제목입력">
 					</div>
-					<button type="submit" class="btn "btn btn-primary"" id="searchBtn">검색</button>
+					<button type="submit" class="btn " btn btn-primary"" id="searchBtn">검색</button>
 					&nbsp;
 					<button type="button" class="btn btn-success" id="writeBtn" style="display: none" onclick="noticeWrite();">글쓰기</button>
 				</form>
@@ -117,6 +119,10 @@ table {
 
 	function noticeWrite() {
 		window.location.href = "/Views/notice/noticeWrite.jsp";
+	}
+
+	function back() {
+		window.location.href = "/Views/member/mainpage.jsp";
 	}
 </script>
 <%
