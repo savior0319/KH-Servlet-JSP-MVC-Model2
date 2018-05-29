@@ -1,0 +1,44 @@
+
+ create table noticecomment -- 커멘트 테이블 생성
+(
+                commentno NUMBER PRIMARY KEY,
+                noticeno NUMBER REFERENCES NOTICE(noticeno),
+			    content VARCHAR2(300),         --300자 제한
+			    userid  VARCHAR2(20) NOT NULL,
+			    regdate DATE
+)
+            
+CREATE SEQUENCE SEQ_noticecomment  	-- SEQ_EMPID 라는 시퀀스 객체 생성
+START WITH 1  			-- 시작 번호는 1부터
+INCREMENT BY 1			-- 1씩 증가
+MAXVALUE 99999999	    -- 최대 100까지
+NOCYCLE				    -- 100 이후에는 증가하지 않고 에러발생 알림
+NOCACHE;			    -- 캐쉬 사용 안함
+--시퀀스 생성
+commit;
+
+drop sequence SEQ_noticecomment;
+
+
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,75,'감사합니다','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,70,'항상 감사합니다.','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,66,'오예 감사','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,75,'자신에게 감사해하네','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,8,'감사합니다','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,56,'감사합니다','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,74,'감사합니다','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,75,'추방해드릴까요?','admin',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,75,'와..대박','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,12,'감사합니다','admin',SYSDATE);
+INSERT INTO NOTICECOMMENT VALUES(SEQ_NOTICECOMMENT.NEXTVAL,121,'장난치냐','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,121,'와..여기 뭐 이따구임?','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,121,'쓰레기네','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,121,'개쓰레기','mslove',SYSDATE);
+insert into noticecomment values(SEQ_noticecomment.NEXTVAL,121,'mslove는 도배로 인한 영구정지','admin',SYSDATE);
+commit;
+
+TRUNCATE TABLE NOTICECOMMENT;
+COMMIT;
+select * from member;
+
+select * from NOTICECOMMENT;
