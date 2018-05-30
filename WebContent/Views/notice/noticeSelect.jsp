@@ -1,30 +1,34 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="jsp.notice.model.vo.NoticeCommentVo"%>
 <%@page import="jsp.member.model.vo.MemberVo"%>
-<%@page import="oracle.net.aso.n"%>
 <%@page import="jsp.notice.model.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
+	@SuppressWarnings("all")
+	ArrayList<NoticeCommentVo> aList = (ArrayList<NoticeCommentVo>) request.getAttribute("comment");
 	NoticeVo nv = (NoticeVo) request.getAttribute("nv");
 	MemberVo mv = (MemberVo) session.getAttribute("user");
 %>
-<%
-	String strReferer = request.getHeader("referer");
 
+<%-- <%
+	String strReferer = request.getHeader("referer");
 	if (strReferer == null) {
 %>
 <script>
-	alert("정상적인 경로를 통해 다시 접근하세요.");
-	document.location.href = "/index.jsp";
-	history.back(-1);
+alert("정상적인 경로를 통해 다시 접근하세요.");
+document.location.href = "/index.jsp";
+history.back(-1);
 </script>
 <%
 	}
-%>
+%> --%>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,7 +36,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<title>[공지] <%=nv.getSubject()%></title>
+<title>[공지] <%=nv.getSubject()%>
+</title>
 </head>
 
 <style>
@@ -51,7 +56,12 @@
 	width: 200px;
 	border: none;
 }
+
+.table, .comment {
+	width: 800px;
+}
 </style>
+
 
 <body>
 	<center>
@@ -70,7 +80,8 @@
 					<hr>
 					<h6 class="card-subtitle mb-2 text-muted">
 						글쓴이 :
-						<%=nv.getUserId()%><br>
+						<%=nv.getUserId()%>
+						<br>
 						작성일 :
 						<%=nv.getRegDate()%>
 					</h6>
@@ -104,23 +115,140 @@
 			</div>
 		</div>
 	</div>
+
+	<br>
+	<center>
+		<div class="comment">
+			<h3>댓글작성</h3>
+			<form action="noticeComment" method="get">
+				<%
+					if ((MemberVo) session.getAttribute("user") == null) {
+				%>
+				<textarea class="form-control" rows="3" id="content" placeholder="로그인 한 사용자만 댓글 작성이 가능합니다" readonly="readonly" onclick="login();" name="content"></textarea>
+				<%
+					} else {
+				%>
+				<textarea class="form-control" rows="3" id="content" placeholder="댓글을 작성하세요" name="comment"></textarea>
+				<%
+					}
+				%>
+				<%
+					if (mv != null) {
+				%>
+				<input type="hidden" name="userId" value="<%=mv.getUserId()%>">
+				<%
+					}
+				%>
+				<input type="hidden" name="noticeNo" value="<%=nv.getNoticeNo()%>">
+				<br>
+				<input type="submit" class="btn btn-primary" value="댓글작성">
+			</form>
+		</div>
+		<br>
+		<table class="table">
+			<%
+				for (NoticeCommentVo ncv : aList) {
+			%>
+			<thead class="thead-light">
+				<tr>
+					<th>
+						<%=ncv.getUserId()%>
+					</th>
+					<th>
+						<%=ncv.getRegDate()%>
+					</th>
+					<th>
+						<%
+							if (mv != null && mv.getUserId().equals(ncv.getUserId())) {
+						%>
+						<button type="button" class="btn btn-primary" id="<%=ncv.getUserId()%>" style="line-height: 10px;" onclick="modifyBtn(<%=ncv.getCommentNO()%>);">수정</button>
+						&nbsp;
+						<button type="button" class="<%=ncv.getCommentNO()%> btn btn-primary" style="display: none; line-height: 10px;" onclick="modifyCompleteBtn(<%=ncv.getCommentNO()%>);">완료</button>
+
+						<button type="button" class="<%=ncv.getCommentNO()%> btn btn-danger" data-toggle="modal" data-target="#exampleModal1" id="delete" style="line-height: 10px;">삭제</button>
+
+
+						<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">댓글 삭제 확인</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">정말 삭제 하시겠습니까?</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+										<button type="button" class="btn btn-primary" onclick="commentDelete(<%=ncv.getCommentNO()%>);">삭제</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<%
+							}
+						%>
+					</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					<input type="text" class="<%=ncv.getCommentNO()%> form-control" id="<%=ncv.getCommentNO()%>" style="display: none; height: 25px; width: 500px;" value="<%=ncv.getContent()%>">
+					</input>
+					<div class="<%=ncv.getCommentNO()%>" style="display: block;"><%=ncv.getContent()%></div>
+				</th>
+			</tr>
+			<%
+				}
+			%>
+
+		</table>
+	</center>
 </body>
 
-<script type="text/javascript">
 
+<script type="text/javascript">
 	function back() {
 		window.location.href = "/notice";
 	}
 
+
 	function modify() {
 		window.location.href = "/noticeModifyBefore?noticeNo=<%=nv.getNoticeNo()%>";
 	}
+
+
+	function login() {
+		alert('로그인을 해주세요');
+		window.open("/Views/member/login_pop.jsp", "_blank", "width=300px height=220px");
+	}
+	
+	function modifyBtn(id) {
+
+		var mod = document.getElementsByClassName(id);
+		mod[0].style.display = "inline";
+		mod[1].style.display = "none";
+		mod[2].style.display = "inline";
+		mod[3].style.display = "none";
+	}
+
+	function modifyCompleteBtn(id) {
+		var content = document.getElementById(id).value;
+		window.location.href = "/noticeCommentModify?comment=" + content + "&commentNo=" + id + "&noticeNo=" + <%=nv.getNoticeNo()%>;
+	}
+	
+	function commentDelete(id){
+		window.location.href = "/noticeCommentDelete?commentNo=" + id + "&noticeNo=" + <%=nv.getNoticeNo()%>;
+	}
+	
 </script>
 
 
 <%
-	if (mv.getUserId().equals("admin")) {
+	if (mv != null && mv.getUserId().equals("admin")) {
 %>
+
 <script type="text/javascript">
 	document.getElementById("modify").style.display = "inline";
 	document.getElementById("delete").style.display = "inline";
@@ -134,8 +262,8 @@
 		window.location.href = "/noticeDelete?noticeNo=" + "<%=nv.getNoticeNo()%>";
 	}
 </script>
+
 <%
 	}
 %>
-
 </html>

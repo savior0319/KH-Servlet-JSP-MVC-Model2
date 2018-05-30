@@ -105,7 +105,7 @@ table {
 					</div>
 					<button type="submit" class="btn btn-primary" id="searchBtn">검색</button>
 					&nbsp;
-					<button type="button" class="btn btn-success" id="writeBtn" style="display: none" onclick="noticeWrite();">글쓰기</button>
+					<button type="button" class="btn btn-success" id="write" style="display: none" onclick="noticeWrite();">글쓰기</button>
 				</form>
 			</div>
 		</center>
@@ -116,7 +116,8 @@ table {
 	if (mv.getUserId().equals("admin")) {
 %>
 <script>
-	document.getElementById("writeBtn").style.display = "inline-block";
+
+	document.getElementById("write").style.display = "inline";
 
 	function noticeWrite() {
 		window.location.href = "/Views/notice/noticeWrite.jsp";
@@ -127,7 +128,15 @@ table {
 	}
 </script>
 <%
+	} else {
+%>
+<script>
+	function back() {
+		window.location.href = "/Views/member/mainpage.jsp";
+	}
+</script>
+
+<%
 	}
 %>
-
 </html>

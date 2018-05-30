@@ -126,6 +126,14 @@ table {
 	}
 </script>
 <%
+	} else {
+%>
+<script>
+	function back() {
+		window.location.href = "/Views/member/mainpage.jsp";
+	}
+</script>
+<%
 	}
 %>
 

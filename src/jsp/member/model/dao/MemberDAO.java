@@ -21,7 +21,7 @@ public class MemberDAO {
 	public MemberDAO() {
 		String path = MemberDAO.class.getResource("").getPath();
 		try {
-			prop.load(new FileReader(path + "query.properties"));
+			prop.load(new FileReader(path + "queryMember.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

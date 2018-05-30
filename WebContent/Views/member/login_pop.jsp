@@ -1,11 +1,4 @@
-<%@page import="jsp.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page errorPage="errorpage.jsp"%>
-
-<%
-	MemberVo mv = (MemberVo) session.getAttribute("user");
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,42 +10,10 @@
 	crossorigin="anonymous"
 >
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<title>index</title>
+<title>로그인</title>
 </head>
 
-<style>
-.wrapper {
-	margin: 0 auto;
-	display: table;
-}
-
-.login-form {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	margin: 0 auto;
-}
-
-.jumbotron {
-	text-align: center;
-	background: skyblue;
-}
-</style>
-
 <body>
-	<%
-		if (mv != null) {
-			response.sendRedirect("/Views/member/loginSuccess.jsp");
-		} else {
-	%>
-
-	<div class="jumbotron">
-		<h1>로그인</h1>
-	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<div class="wrapper">
 		<form action="/memberLogin" method="POST" class="login-form">
 			<div class="form-group">
@@ -67,48 +28,7 @@
 				<strong>오류 : </strong> 입력하지 않은 항목이 있습니다!
 			</div>
 			<button type="submit" class="btn btn-primary" onclick="return login();">로그인</button>
-			<button type="button" class="btn btn-primary" onclick="joinus();">회원가입</button>
-			<button type="button" class="btn btn-primary" onclick="idsearch();">ID찾기</button>
-			<button type="button" class="btn btn-primary" onclick="pwchange();">PW변경</button>
 		</form>
 	</div>
 </body>
-
-<!-- <script>
-	history.pushState(null, null, location.href);
-	window.onpopstate = function() {
-		history.go(1);
-	};
-</script> 뒤로가기 방지-->
-
-<script>
-	$(document).ready(function() {
-		$('#userId').focus();
-	});
-
-
-	function joinus() {
-		window.location.href = "/Views/member/joinus.jsp";
-	}
-
-	function idfind() {
-		window.location.href = "#";
-	}
-
-	function pwchange() {
-		window.location.href = "#";
-	}
-
-	function login() {
-		if ($('#userId').val() == "" && $('#userPwd').val() == "") {
-			$('#danger').css('display', 'block');
-			return false;
-		}
-	}
-</script>
-
-<%
-	}
-%>
-
 </html>

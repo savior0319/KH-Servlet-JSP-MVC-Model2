@@ -1,9 +1,6 @@
 package jsp.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,34 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jsp.notice.model.service.NoticeService;
-import jsp.notice.model.vo.NoticeCommentVo;
-import jsp.notice.model.vo.NoticeVo;
 
-@WebServlet(name = "NoticeSelect", urlPatterns = { "/noticeSelect" })
-public class NoticeSelectServlet extends HttpServlet {
+@WebServlet(name = "NoticeComment", urlPatterns = { "/noticeComment" })
+public class NoticeCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public NoticeSelectServlet() {
+	public NoticeCommentServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+
+		String comment = request.getParameter("comment");
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String userId = request.getParameter("userId");
 
-		NoticeVo nv = new NoticeService().noticeSelect(noticeNo);
+		int result = new NoticeService().noticeCommentWrite(noticeNo, userId, comment);
 
-		// 댓글
-		ArrayList<NoticeCommentVo> aList = new NoticeService().noticeComment(noticeNo);
-		
-		
-		if (nv != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/Views/notice/noticeSelect.jsp");
-			request.setAttribute("nv", nv);
-			request.setAttribute("comment", aList);
-			view.forward(request, response);
+		if (result > 0) {
+			response.sendRedirect("/noticeSelect?noticeNo=" + noticeNo);
 		} else {
-			response.sendRedirect("/Views/error/noticeListNotFound.jsp");
+			response.sendRedirect("/Views/error/error.jsp");
 		}
 
 	}

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import jdbc.common.JDBCTemplate;
+import jsp.notice.model.vo.NoticeCommentVo;
 import jsp.notice.model.vo.NoticeVo;
 
 public class NoticeDao {
@@ -21,7 +22,7 @@ public class NoticeDao {
 	public NoticeDao() {
 		String path = NoticeDao.class.getResource("").getPath();
 		try {
-			prop.load(new FileReader(path + "query.properties"));
+			prop.load(new FileReader(path + "queryNotice.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -382,7 +383,7 @@ public class NoticeDao {
 	}
 
 	public int noticeDelete(Connection conn, int noticeNo) {
-		
+
 		int result = 0;
 
 		String query = prop.getProperty("noticeDelete");
@@ -400,30 +401,95 @@ public class NoticeDao {
 		return result;
 	}
 
-	// 메뉴바 부분
-	// StringBuilder sb = new StringBuilder();
-	//
-	// if (needPrev) {
-	// sb.append("<a href='/notice?currentPage=" + (startNavi - 1) + "'> < </a>");
-	//
-	// // sb.append("<a href='/notice?currentPage=" + (startNavi - 5) + "'> <<
-	// </a>");
-	// // 5 페이지 앞으로
-	// // sb.append("<a href='/notice?currentPage=1'> <<< </a>");
-	// // 1 페이지로
-	// }
-	//
-	// for (int i = startNavi; i <= endNavi; i++) {
-	// if (i == currentPage) {
-	// sb.append("<a href='/notice?currentPage=" + i + "'><B> " + i + " </B></a>");
-	// } else {
-	// sb.append("<a href='/notice?currentPage=" + i + "'> " + i + " </a>");
-	// }
-	// }
-	//
-	// if (needNext) { // 끝 페이지가 아니라면
-	// sb.append("<a href='/notice?currentPage=" + (endNavi + 1) + "'> > </a>");
-	// }
-	//
-	// return sb.toString();
+	public ArrayList<NoticeCommentVo> noticeComment(Connection conn, int noticeNo) {
+
+		ArrayList<NoticeCommentVo> aList = new ArrayList<NoticeCommentVo>();
+
+		String query = prop.getProperty("noticeComment");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NoticeCommentVo ncv = new NoticeCommentVo();
+				ncv.setCommentNO(rs.getInt("commentno"));
+				ncv.setContent(rs.getString("content"));
+				ncv.setNoticeNo(rs.getInt("noticeno"));
+				ncv.setRegDate(rs.getDate("regdate"));
+				ncv.setUserId(rs.getString("userid"));
+
+				aList.add(ncv);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return aList;
+	}
+
+	public int noticeCommentWrite(Connection conn, int noticeNo, String userId, String comment) {
+
+		int result = 0;
+
+		String query = prop.getProperty("noticeCommentWrite");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			pstmt.setString(2, comment);
+			pstmt.setString(3, userId);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public int noticeCommentModify(Connection conn, int commentNo, String comment) {
+
+		int result = 0;
+
+		String query = prop.getProperty("noticeCommentModify");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, commentNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public int noticeCommentDelete(Connection conn, int commentNo) {
+		
+		int result = 0;
+
+		String query = prop.getProperty("noticeCommentDelete");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 }
