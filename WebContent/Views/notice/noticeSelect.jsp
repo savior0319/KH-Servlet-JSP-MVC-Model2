@@ -11,19 +11,6 @@
 	MemberVo mv = (MemberVo) session.getAttribute("user");
 %>
 
-<%-- <%
-	String strReferer = request.getHeader("referer");
-	if (strReferer == null) {
-%>
-<script>
-alert("정상적인 경로를 통해 다시 접근하세요.");
-document.location.href = "/index.jsp";
-history.back(-1);
-</script>
-<%
-	}
-%> --%>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -102,12 +89,12 @@ history.back(-1);
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">삭제 확인</h5>
+					<h5 class="modal-title" id="exampleModalLabel">공지 삭제 확인</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">정말 삭제 하시겠습니까?</div>
+				<div class="modal-body">공지를 정말 삭제 하시겠습니까?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-primary" onclick="noticeDelete();">삭제</button>
@@ -124,11 +111,11 @@ history.back(-1);
 				<%
 					if ((MemberVo) session.getAttribute("user") == null) {
 				%>
-				<textarea class="form-control" rows="3" id="content" placeholder="로그인 한 사용자만 댓글 작성이 가능합니다" readonly="readonly" onclick="login();" name="content"></textarea>
+				<textarea class="form-control" rows="3" id="notice" placeholder="로그인 한 사용자만 댓글 작성이 가능합니다" readonly="readonly" onclick="login();" name="content"></textarea>
 				<%
 					} else {
 				%>
-				<textarea class="form-control" rows="3" id="content" placeholder="댓글을 작성하세요" name="comment"></textarea>
+				<textarea class="form-control" rows="3" id="notice" placeholder="댓글을 작성하세요" name="comment"></textarea>
 				<%
 					}
 				%>
@@ -141,8 +128,12 @@ history.back(-1);
 				%>
 				<input type="hidden" name="noticeNo" value="<%=nv.getNoticeNo()%>">
 				<br>
-				<input type="submit" class="btn btn-primary" value="댓글작성">
+				<input type="submit" class="btn btn-primary" value="댓글작성" onclick="return commentSub();">
 			</form>
+			<br>
+			<div class="alert alert-danger" style="display: none" id="danger">
+				<strong>오류 : </strong> 댓글 내용을 입력해주세요
+			</div>
 		</div>
 		<br>
 		<table class="table">
@@ -177,7 +168,7 @@ history.back(-1);
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="modal-body">정말 삭제 하시겠습니까?</div>
+									<div class="modal-body">댓글을 정말 삭제 하시겠습니까?</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 										<button type="button" class="btn btn-primary" onclick="commentDelete(<%=ncv.getCommentNO()%>);">삭제</button>
@@ -240,6 +231,13 @@ history.back(-1);
 	
 	function commentDelete(id){
 		window.location.href = "/noticeCommentDelete?commentNo=" + id + "&noticeNo=" + <%=nv.getNoticeNo()%>;
+	}
+	
+	function commentSub(){
+	if(document.getElementById("notice").value == ""){
+			document.getElementById("danger").style.display = "block";
+			return false;
+		} 
 	}
 	
 </script>
