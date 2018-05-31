@@ -116,7 +116,6 @@ table {
 	if (mv.getUserId().equals("admin")) {
 %>
 <script>
-
 	document.getElementById("write").style.display = "inline";
 
 	function noticeWrite() {

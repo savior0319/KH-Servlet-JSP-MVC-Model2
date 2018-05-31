@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous"
 >
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </script>
 
 <title>메인페이지</title>
@@ -71,6 +73,17 @@
 			<a href="/allMember" id="adminOnly" style="display: none">전체 회원 조회</a> <a href="/Views/upload/upload.jsp">파일업로드</a>
 			<br>
 			<a href="/fileList">다운로드</a>
+			<br>
+			<a href="/Views/upload/upload2.jsp">파일업로드2</a>
+			<br>
+			<a href="/fileList2">다운로드2</a>
+			<br>
+			<br>
+			<input type="text" class="form-control" id="moneyName" placeholder="결제할 상품명 입력">
+			<br>
+			<input type="text" class="form-control" id="moneyVal" placeholder="결제할 금액 입력">
+			<br>
+			<button type="button" class="btn btn-primary" onclick="moneyTest();">결제 테스트</button>
 		</h3>
 	</div>
 </body>
@@ -88,6 +101,42 @@
 			$('#pwdChk1').fadeIn(300);
 		});
 	});
+
+	// 결제 테스트
+	var IMP = window.IMP;
+	IMP.init('imp59164717');
+
+	function moneyTest() {
+		var moneyVal = $('#moneyVal').val();
+		var moneyName = $('#moneyName').val();
+
+		IMP.request_pay({
+			pg : 'inicis',
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + new Date().getTime(),
+			name : moneyName,
+			amount : moneyVal,
+			buyer_email : 'savior0319@0319@naver.com',
+			buyer_name : '안형조',
+			buyer_tel : '010-3787-5606',
+			buyer_addr : '인천 계양구 작전동',
+			buyer_postcode : '21115',
+			m_redirect_url : '/index.jsp'
+		}, function(rsp) {
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '고유ID : ' + rsp.imp_uid;
+				msg += '상점 거래ID : ' + rsp.merchant_uid;
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				msg += '카드 승인번호 : ' + rsp.apply_num;
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+
+			/* 	alert(msg); */
+		});
+	}
 </script>
 
 <%

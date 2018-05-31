@@ -35,7 +35,7 @@
 		<br>
 		<br>
 		<div class="wrapper">
-			<form action="/upload" method="post" enctype="multipart/form-data">
+			<form action="/upload2" method="post" enctype="multipart/form-data">
 				<input class="btn btn-primary" type="file" name="upfile">
 				<input class="btn btn-success" type="submit" value="업로드">
 				<input class="btn btn-danger" type="reset" value="취소">

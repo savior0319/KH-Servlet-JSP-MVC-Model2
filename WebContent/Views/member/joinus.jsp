@@ -5,6 +5,16 @@
 <html lang="en">
 
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120156974-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-120156974-1');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -143,50 +153,61 @@ fieldset {
 
 <script>
 	// 전역 변수 선언
-	var idCheck1 = "",
-		idCheck2 = "";
+	var idCheck1 = "", idCheck2 = "";
 
-	window.onload = function() {}
+	window.onload = function() {
+	}
 
 	function back() {
 		history.back(-1);
 	}
 
 	// 아이디 중복체크 AJAX
-	$('#id').keyup(function() {
-		var id = $('#id').val();
-		if (id == "") {
-			// 빈 칸일때 backspace 방지
-			$('#idCheckMessage').html("");
-		} else {
-			$.ajax({
-				type : 'POST',
-				url : '/idcheck',
-				data : {
-					id : id
-				},
-				success : function(result) {
-					if (result == 1) {
-						$('#idCheckMessage').html('이미 사용중인 아이디 입니다<br><br>').css('color', 'red').css('font-size', '14px');
-					} else {
-						$('#idCheckMessage').html('사용 가능한 아이디 입니다<br><br>').css('color', 'blue').css('font-size', '14px');
-						idCheck1 = id;
-					}
+	$('#id').keyup(
+			function() {
+				var id = $('#id').val();
+				if (id == "") {
+					// 빈 칸일때 backspace 방지
+					$('#idCheckMessage').html("");
+				} else {
+					$.ajax({
+						type : 'POST',
+						url : '/idcheck',
+						data : {
+							id : id
+						},
+						success : function(result) {
+							if (result == 1) {
+								$('#idCheckMessage').html(
+										'이미 사용중인 아이디 입니다<br><br>').css('color',
+										'red').css('font-size', '14px');
+							} else {
+								$('#idCheckMessage').html(
+										'사용 가능한 아이디 입니다<br><br>').css('color',
+										'blue').css('font-size', '14px');
+								idCheck1 = id;
+							}
+						}
+					});
 				}
 			});
-		}
-	});
 
 	// 가입 버튼
 	function submitBtn() {
 		var id = $('#id').val();
 		idCheck2 = id;
 
-		if (document.getElementById('id').value == '' || document.getElementById('pwd').value == '' || document.getElementById(
-				'pwdRe').value == '' || document.getElementById('name').value == '' || document.getElementById('age').value == '' ||
-			document.getElementById('mail').value == '' || document.getElementById('phone').value == '' || document.getElementById(
-				'addr').value == '' || document.getElementById('hobby').value == '' || ($('#genderM').is(":checked") == false &&
-			$('#genderF').is(":checked") == false)) {
+		if (document.getElementById('id').value == ''
+				|| document.getElementById('pwd').value == ''
+				|| document.getElementById('pwdRe').value == ''
+				|| document.getElementById('name').value == ''
+				|| document.getElementById('age').value == ''
+				|| document.getElementById('mail').value == ''
+				|| document.getElementById('phone').value == ''
+				|| document.getElementById('addr').value == ''
+				|| document.getElementById('hobby').value == ''
+				|| ($('#genderM').is(":checked") == false && $('#genderF').is(
+						":checked") == false)) {
 			$('#idDanger').hide();
 			$('#pwDanger').hide();
 			$('#danger').show();
@@ -201,8 +222,8 @@ fieldset {
 			$('#idDanger').hide();
 			$('#pwDanger').show();
 			return false;
-		}
-		else return true;
+		} else
+			return true;
 	}
 
 	function sendEmail() {
@@ -211,12 +232,10 @@ fieldset {
 		var left = Math.ceil((window.screen.width - windowW) / 2);
 		var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
 
-
 		var mail = document.getElementById("mail").value;
-		window.open("/Views/member/mailAuth.jsp?userEmail=" + mail, "_blank", "top=" + top + ", left=" + left + ", height=" +
-			windowH + ", width=" +
-			windowW);
-
+		window.open("/Views/member/mailAuth.jsp?userEmail=" + mail, "_blank",
+				"top=" + top + ", left=" + left + ", height=" + windowH
+						+ ", width=" + windowW);
 
 	}
 </script>
