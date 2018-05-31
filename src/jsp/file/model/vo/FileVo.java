@@ -5,18 +5,10 @@ import java.sql.Timestamp;
 public class FileVo {
 
 	private String fileName, filePath, fileUser;
-	private int fileSize;
-	private Timestamp upload;
+	private long fileSize;
+	private Timestamp uploadTime;
 
 	public FileVo() {
-	}
-
-	public FileVo(String fileName, String filePath, String fileUser, int fileSize, Timestamp upload) {
-		this.fileName = fileName;
-		this.filePath = filePath;
-		this.fileUser = fileUser;
-		this.fileSize = fileSize;
-		this.upload = upload;
 	}
 
 	public String getFileName() {
@@ -43,19 +35,19 @@ public class FileVo {
 		this.fileUser = fileUser;
 	}
 
-	public int getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 
 	public Timestamp getUpload() {
-		return upload;
+		return uploadTime;
 	}
 
 	public void setUpload(Timestamp upload) {
-		this.upload = upload;
+		this.uploadTime = upload;
 	}
 }

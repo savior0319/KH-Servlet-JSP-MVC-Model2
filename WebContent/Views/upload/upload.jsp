@@ -30,6 +30,8 @@
 	<center>
 		<div class="jumbotron">
 			<h1>파일업로드</h1>
+			<br>
+			<button type="button" class="btn btn-primary" onclick="back()">뒤로가기</button>
 		</div>
 		<br>
 		<br>
@@ -38,12 +40,16 @@
 				<input class="btn btn-primary" type="file" name="upfile">
 				<input class="btn btn-success" type="submit" value="업로드">
 				<input class="btn btn-danger" type="reset" value="취소">
-			</form>
 		</div>
+		</form>
 	</center>
 	<br>
-	<br>
-	<br>
-
-
 </body>
+
+<script type="text/javascript">
+	function back() {
+		window.location.href = "/Views/member/mainpage.jsp";
+	}
+</script>
+
+</html>

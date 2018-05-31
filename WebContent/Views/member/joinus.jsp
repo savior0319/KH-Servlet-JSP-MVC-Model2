@@ -93,6 +93,10 @@ fieldset {
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="mail" id="mail" placeholder="이메일">
 				</div>
 
+				<button type="button" class="btn btn-primary" onclick="sendEmail();">이메일 인증</button>
+
+				<br>
+				<br>
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
@@ -199,6 +203,21 @@ fieldset {
 			return false;
 		}
 		else return true;
+	}
+
+	function sendEmail() {
+		var windowW = 500; // 창의 가로 길이
+		var windowH = 180; // 창의 세로 길이
+		var left = Math.ceil((window.screen.width - windowW) / 2);
+		var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
+
+
+		var mail = document.getElementById("mail").value;
+		window.open("/Views/member/mailAuth.jsp?userEmail=" + mail, "_blank", "top=" + top + ", left=" + left + ", height=" +
+			windowH + ", width=" +
+			windowW);
+
+
 	}
 </script>
 
