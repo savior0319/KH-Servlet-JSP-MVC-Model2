@@ -1,6 +1,7 @@
 package jsp.file.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import jdbc.common.JDBCTemplate;
 import jsp.file.model.dao.FileDao;
@@ -25,6 +26,13 @@ public class FileService {
 		JDBCTemplate.close(conn);
 
 		return result;
+	}
+
+	public ArrayList<FileVo> fileList() {
+		conn = JDBCTemplate.getConnect(conn);
+		ArrayList<FileVo> aList = new FileDao().fileList(conn);
+		JDBCTemplate.close(conn);
+		return aList;
 	}
 
 }

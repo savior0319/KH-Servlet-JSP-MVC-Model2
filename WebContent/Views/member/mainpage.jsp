@@ -68,8 +68,9 @@
 			<br>
 			<a href="/notice">공지사항</a>
 			<br>
-			<a href="/allMember" id="adminOnly" style="display: none">전체 회원 조회</a>
-			<a href="/Views/upload/upload.jsp">파일업로드</a>
+			<a href="/allMember" id="adminOnly" style="display: none">전체 회원 조회</a> <a href="/Views/upload/upload.jsp">파일업로드</a>
+			<br>
+			<a href="/fileList">다운로드</a>
 		</h3>
 	</div>
 </body>

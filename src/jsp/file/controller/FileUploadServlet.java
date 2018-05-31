@@ -77,9 +77,6 @@ public class FileUploadServlet extends HttpServlet {
 			File file = new File(fullFilePath); // 해당 파일을 오픈
 			long fileSize = file.length();
 
-			System.out.println(fullFilePath);
-			System.out.println(fileSize);
-
 			// 4. 파일 유저명
 			// 만들 필요없음 (위에서 userId 변수를 만들어 놓았음)
 
