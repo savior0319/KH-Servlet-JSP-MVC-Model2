@@ -30,8 +30,8 @@
 <c:set var="checkAdmin" value="${sessionScope.user.userId}" />
 <c:choose>
 	<c:when test="${checkAdmin!='admin'}">
-response.sendRedirect("/Views/member/errorpage.jsp");
-</c:when>
+		<jsp:forward page="/Views/member/errorpage.jsp" />
+	</c:when>
 	<c:otherwise>
 		<body>
 			<div class="jumbotron">
