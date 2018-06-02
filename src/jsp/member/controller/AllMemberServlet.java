@@ -30,7 +30,7 @@ public class AllMemberServlet extends HttpServlet {
 		if (aList == null) {
 			response.sendRedirect("/Views/member/noMemberResult.jsp");
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("/Views/member/allMember.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/Views/member/allMember2.jsp");
 			request.setAttribute("userList", aList);
 			view.forward(request, response);
 		}
