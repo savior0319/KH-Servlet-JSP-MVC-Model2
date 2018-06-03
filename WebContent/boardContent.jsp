@@ -72,8 +72,8 @@ table tr.active {
 				<th>내용</th>
 				<th>작성시간</th>
 			</tr>
-			<c:forEach items="${comment}" var="cm">
-				<tr>
+			<c:forEach items="${comment}" var="cm" begin="0" varStatus="status">
+				<tr name="count">
 					<td>${cm.writer}</td>
 					<td>${cm.commentContent}</td>
 					<td>${cm.commentTime}</td>
@@ -87,15 +87,71 @@ table tr.active {
 		<br>
 	</div>
 </body>
+<!-- <script> 댓글 10개씩
+	window.onload = function() {
+		count = document.getElementsByName('count').length;
+		test = parseInt(count / 10);
 
-<script>
-	$('table tr:lt(5)').addClass('active');
+		if (count < 11) {
+			$('#more').hide();
+		}
 
+	}
+
+
+	$('table tr:lt(11)').addClass('active');
+
+	click = 0;
 	$('#more').on('click', function(e) {
 		e.preventDefault();
 		var $rows = $('table tr');
 		var lastActiveIndex = $rows.filter('.active:last').index();
-		$rows.filter(':lt(' + (lastActiveIndex + 5) + ')').addClass('active');
+		$rows.filter(':lt(' + (lastActiveIndex + 11) + ')').addClass('active');
+		click++;
+
+		if (count % 10 == 0) {
+			if ((test - 1) == click) {
+				$('#more').hide();
+			}
+		} else {
+			if (test == click) {
+				$('#more').hide();
+			}
+		}
+
+	});
+</script> -->
+<script>
+	window.onload = function() {
+		count = document.getElementsByName('count').length;
+		test = parseInt(count / 5);
+
+		if (count < 6) {
+			$('#more').hide();
+		}
+
+	}
+
+
+	$('table tr:lt(6)').addClass('active');
+
+	click = 0;
+	$('#more').on('click', function(e) {
+		e.preventDefault();
+		var $rows = $('table tr');
+		var lastActiveIndex = $rows.filter('.active:last').index();
+		$rows.filter(':lt(' + (lastActiveIndex + 6) + ')').addClass('active');
+		click++;
+
+		if (count % 5 == 0) {
+			if ((test - 1) == click) {
+				$('#more').hide();
+			}
+		} else {
+			if (test == click) {
+				$('#more').hide();
+			}
+		}
 	});
 </script>
 </html>
