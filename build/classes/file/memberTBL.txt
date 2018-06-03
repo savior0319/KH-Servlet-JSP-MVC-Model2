@@ -1,0 +1,56 @@
+create table member(
+userid varchar(20) primary key,
+userpwd varchar(20) not null,
+username varchar(20) not null,
+age number ,
+email varchar(30) not null,
+phone varchar(13) not null,
+address varchar(50),
+gender varchar(1) not null,
+hobby varchar(30),
+ENROLLDATE DATE,
+activation varchar2(1)
+);
+
+INSERT INTO MEMBER VALUES('mslove','1234','노민수',20,'mslove@kh.org','010-1111-2222','경기도 부천시 442-1','M','운동,노래',SYSDATE ,'y');
+INSERT INTO MEMBER VALUES('admin','1111','관리자',25,'admin@kh.org','010-3333-4444','서울시 112-3','F','게임,영화',SYSDATE, 'y');
+INSERT INTO MEMBER VALUES('test','2222','테스터',50,'test@naver.com','010-5156-5343','인천시 1152-156','F','운동,독서',SYSDATE, 'y');
+insert into member values('seoul','9999','서울충',50,'seoul@seoul.kr','010-9999-4545','서울시 646-123','M','노래,게임',SYSDATE, 'y');
+
+commit;
+
+truncate table member;
+
+SELECT * FROM MEMBER;
+
+drop table member;
+
+
+alter table member add(activation varchar2(1));
+
+UPDATE MEMBER SET ACTIVATION = 'y';
+
+commit;
+
+
+/*
+select * from member;
+
+TRUNCATE TABLE MEMBER;
+
+commit;
+
+ALTER TABLE MEMBER ADD(last_modified DATE); -- 비밀번호 변경일 추가
+
+UPDATE MEMBER SET LAST_MODIFIED = SYSDATE;
+
+
+UPDATE MEMBER SET LAST_MODIFIED = TO_DATE('18/01/01') WHERE USERID = 'admin';
+
+SELECT FLOOR(SYSDATE - LAST_MODIFIED) FROM MEMBER WHERE USERID = 'admin';
+
+delete from member where userid = '1';
+
+select userpwd from member where userid = 'admin';
+*/
+
